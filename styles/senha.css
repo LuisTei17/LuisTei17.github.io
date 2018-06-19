@@ -1,0 +1,9 @@
+.login {
+  height:220px;
+  width:30%;
+}
+
+.login h2 {
+    position: relative;
+    left: 15%;
+}

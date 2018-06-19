@@ -1,0 +1,72 @@
+
+h2 {
+    color: #f1f1f1;
+    font-weight: bolder;
+}
+
+ label {
+    color: #f1f1f1;
+    font-weight: bold;
+      
+}
+body {
+    background-color: #efefef;
+}
+
+.logo {
+    position: relative;
+    top: 30px;
+    left: 34%;
+    margin-bottom: 20px;
+}
+
+.login {
+  border-radius: 5%;
+  padding:20px;
+  background-color:#26A9BA;
+  height:330px;
+  width:30%;
+  position:relative;
+  top:40px;
+}
+
+.login h2 {
+    position: relative;
+    left: 40%;
+    bottom: 10px;
+}
+
+a {
+    color: #f4f4f4;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #f4f4f4
+}
+
+.botao {
+    background-color: #efefef;
+    border-color: #f4f4f4;    
+    color: #26A9BA;
+    position: relative;
+    font-weight: bold;
+    left: 80%;
+}
+
+.botao:hover {
+    background-color: #efefef;
+    color: #010101;
+    border-color: #f4f4f4;    
+
+}
+
+.copyright {
+    color: #26A9BA;
+    position: relative;
+    top: 50px;
+    left: 38%;
+    width: 500px;
+    margin-right: 100px;
+}
+
