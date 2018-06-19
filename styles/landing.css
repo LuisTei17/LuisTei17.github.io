@@ -86,6 +86,14 @@ section {
     font-weight: bold;
 }
 
+
+.sub-menu {
+    display: none;
+}
+.menu-subs:hover > ul.sub-menu {
+    display: block;
+}
+
 ul li .sub-link {
     text-decoration: none;
     font-size: 14px;

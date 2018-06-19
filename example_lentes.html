@@ -20,7 +20,7 @@
     <body ng-app="MyApp" ng-cloak>
         <div ng-controller="AppCtrl" layout="column" style="height:100%" ng-cloak>
             
-            
+            <section layout="row" flex>
 
                 <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
                 md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
@@ -43,34 +43,28 @@
                     </md-content>
                 
                 </md-sidenav>
-                <md-content class="background" flex layout-padding>
+                
+                <md-content class="background" layout-padding>
                     <img class="logo" src="logo.png"/>
-                    <div ng-cloak>
-                        <md-content>
-                            <md-tabs md-stretch-tabs="always" md-dynamic-height md-border-bottom>
-                                <md-tab label="one">
-                                    <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab One</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> 
-                                    </md-content>
-                                </md-tab>
-                                <md-tab label="two">
-                                    <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab Two</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue.</p>
-                                    </md-content>
-                                </md-tab>
-                                <md-tab label="three">
-                                    <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab Three</h1>
-                                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. </p>
-                                    </md-content>
-                                </md-tab>
-                            </md-tabs>
-                        </md-content>
-                    </div>
+                     <form action="landing.html">
+                        <!-- <md-input-container>
+                            <label>State</label>
+                            <md-select ng-model="ctrl.userState">
+                                    <md-option ng-value="compras">Compras</md-option>
+                                    <md-option ng-value="amostras">Amostras</md-option>
+                                    <md-option ng-value="trocas">Trocas</md-option>
+                                    <md-option ng-value="devoluções">Devoluções</md-option>
+                                    <md-option ng-value="bonificações">Bonificações</md-option>
+                                    <md-option ng-value="relatórios">Relatórios</md-option>
+                                    <md-option ng-value="contato">Contato</md-option>
+                                    <md-option ng-value="pagamentos">Pagamentos</md-option>
+                            </md-select>
+                        </md-input-container> -->
+                     </form>
+
                 </md-content>
                 
+            </section>
         </div>
     
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
