@@ -1,0 +1,83 @@
+.close {
+    min-width: 50px;
+    position: relative;
+}
+
+.close md-icon {
+    color: #26A9BA;         
+
+}
+
+
+
+.main-link {
+    text-decoration: none;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+.main-link:hover {
+    text-decoration: none;
+    color: #f1f1f1;
+    
+}
+
+.content-list {
+    position: relative;
+    height: 250px;
+    top: 100px;
+}
+
+.links-list li {
+    margin-bottom: 15px;
+}
+
+.links-list li a {
+
+    font-size: 20px;
+}
+
+.links-list li a:hover {
+    font-weight: bold;
+}
+
+
+.sub-menu {
+    height: 0px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s, height 0.5s linear;
+
+}
+.menu-subs:hover > ul.sub-menu {
+    visibility: visible;
+    opacity: 1;
+    height: 80px;
+}
+
+
+ul li .sub-link {
+    text-decoration: none;
+    font-size: 14px;
+    color: #f1f1f1;
+}
+
+.sub-link:hover {
+    text-decoration: none;
+
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.sidebar {
+    width: 15%;
+}
+
+.sidebar md-content {
+    position: relative;
+    right: 20px;
+}
+
+.sidebar, .sidebar md-content {
+    background-color: #26A9BA;
+}
