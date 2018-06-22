@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
-    <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/landing.css">
+    <link rel="stylesheet" href="styles/example.css">
     <link rel="stylesheet" href="styles/sidebar.css">
     </head>
 
     <body ng-app="MyApp" ng-cloak>
-        <div ng-controller="AppCtrl" layout="column" style="height:100%" ng-cloak>
+        <div ng-controller="AppCtrl as ctrl" layout="column" style="height:100%" ng-cloak>
             
             <section layout="row" flex>
 
@@ -27,16 +27,17 @@
                             
                     <md-content class="content-list" layout-margin>
                         <ul class="links-list">
-
+                            
                             <li class="menu-subs">
                                 <a class="main-link" onclick="open"href="">Pedidos</a>
                                 <ul class="sub-menu">
-                                    <li><a href="" class="sub-link">Lentes</a></li>
-                                    <li><a href="" class="sub-link">Soluções</a></li>
-                                    <li><a href="" class="sub-link">Cirúrgico</a></li>
+                                    <li><a href="" id="lentes" class="sub-link">Lentes</a></li>
+                                    <li><a href="" class="sub-link">Solucoes</a></li>
+                                    <li><a href="" class="sub-link">Cirurgico</a></li>
                                 </ul>
                             
                             </li>
+
                             <li><a class="main-link" href="index.html">Backoffice</a></li>
                             <li><a class="main-link" href="index.html">Deslogar</a></li>
                         </ul>
@@ -46,24 +47,8 @@
                 
                 <md-content class="background" layout-padding>
                     <img class="logo" src="logo.png"/>
-                     <form action="landing.html">
-                        <!-- <md-input-container>
-                            <label>State</label>
-                            <md-select ng-model="ctrl.userState">
-                                    <md-option ng-value="compras">Compras</md-option>
-                                    <md-option ng-value="amostras">Amostras</md-option>
-                                    <md-option ng-value="trocas">Trocas</md-option>
-                                    <md-option ng-value="devoluções">Devoluções</md-option>
-                                    <md-option ng-value="bonificações">Bonificações</md-option>
-                                    <md-option ng-value="relatórios">Relatórios</md-option>
-                                    <md-option ng-value="contato">Contato</md-option>
-                                    <md-option ng-value="pagamentos">Pagamentos</md-option>
-                            </md-select>
-                        </md-input-container> -->
-                     </form>
-
+                    
                 </md-content>
-                
             </section>
         </div>
     
@@ -72,8 +57,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
         
         <script src="scripts/app.js"></script>
+        <script src="scripts/sidebar.js"></script>
     
     </body>
 

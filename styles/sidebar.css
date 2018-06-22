@@ -8,8 +8,6 @@
 
 }
 
-
-
 .main-link {
     text-decoration: none;
     color: #f1f1f1;
@@ -28,18 +26,15 @@
     top: 100px;
 }
 
-.links-list li {
+.lista_categoria li, .links-list li {
     margin-bottom: 15px;
 }
 
-.links-list li a {
+.lista_categoria li a, .links-list li a {
 
     font-size: 20px;
 }
 
-.links-list li a:hover {
-    font-weight: bold;
-}
 
 
 .sub-menu {
@@ -63,7 +58,7 @@ ul li .sub-link {
 }
 
 .sub-link:hover {
-    text-decoration: none;
+    text-decoration: none;  
 
     font-weight: bold;
     color: #f1f1f1;
@@ -81,3 +76,4 @@ ul li .sub-link {
 .sidebar, .sidebar md-content {
     background-color: #26A9BA;
 }
+
