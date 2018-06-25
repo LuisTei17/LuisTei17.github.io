@@ -40,30 +40,47 @@
                     <h2>Compra de lentes</h2>
                     <div class="title" layout="row" layout-align="space-between center">
                         <span>Forma de compra</span>
-                        <md-select placeholder="{{categorias[0].nome}}" ng-model="ctrl.userState">
-                            <md-option><em>None</em></md-option>
-                            <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
-                            {{categoria.nome}}
+                        <md-select placeholder="{{formas[0].nome}}" ng-model="ctrl.formasCompra">
+                            <md-option ng-repeat="forma in formas" ng-value="forma.nome">
+                            {{forma.nome}}
                             </md-option>
                         </md-select>
                     </div>
                     <div class="title" layout="row" layout-align="space-between center">
-                        <span>Forma de compra</span>
-                        <md-select placeholder="{{categorias[0].nome}}" ng-model="ctrl.userState">
-                            <md-option><em>None</em></md-option>
-                            <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
-                            {{categoria.nome}}
+                        <span>Forma de Faturamento</span>
+                        <md-select placeholder="{{tiposFaturamento[0].nome}}" ng-model="ctrl.formasFaturamento">
+                            <md-option ng-repeat="faturamento in tiposFaturamento" ng-value="faturamento.nome">
+                            {{faturamento.nome}}
                             </md-option>
                         </md-select>
                     </div>
                     <div class="title" layout="row" layout-align="space-between center">
-                        <span>Forma de compra</span>
-                        <md-select placeholder="{{categorias[0].nome}}" ng-model="ctrl.userState">
-                            <md-option><em>None</em></md-option>
-                            <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
-                            {{categoria.nome}}
-                            </md-option>
-                        </md-select>
+                        <span>Condicoes de pagamento</span>
+                        <md-select placeholder="Escolha uma condicao" ng-model="ctrl.condicoesDePagamento">
+                        <span ng-repeat="condicaoPagamento in condicoesPagamento">
+                                <span ng-repeat="(tipo,tiposPagamento) in condicaoPagamento">
+                                    {{tipo}}
+                                    <md-option ng-repeat="pagamento in tiposPagamento" ng-value="pagamento.nome">
+                                        {{pagamento.nome}}
+                                    </md-option>
+                                </span>
+                            </md-select>
+                        </span>
+                    </div>
+                    <div class="title" layout="row" layout-align="space-between center">
+                        <span>Pedido Interno do Cliente</span>
+                        <md-input-container>
+                            <label>Pedido Interno</label>
+                            <input ng-model="pedidoInterno">
+                        </md-input-container>
+                        
+                    </div>
+                    <div class="title" layout="row" layout-align="space-between center">
+                        <span>Observação NF</span>
+                        <md-input-container>
+                            <label>Observação</label>
+                            <input ng-model="user.title">
+                        </md-input-container>
                     </div>
             
                 </md-content>

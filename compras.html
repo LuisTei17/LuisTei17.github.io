@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-br">
+
+    <head>
+    <meta charset="UTF-8">
+
+    <title>Landing page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <link rel="stylesheet" href="styles/landing.css">
+    <link rel="stylesheet" href="styles/example.css">
+    <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/compras.css">
+    </head>
+
+    <body ng-app="MyApp" ng-cloak>
+        <div ng-controller="AppCtrl as ctrl" layout="column" style="height:100%" ng-cloak>
+            
+            <section layout="row" flex>
+
+                <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
+                md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
+                            
+                    <md-content class="content-list" layout-margin>
+                        <ul class="links-list">
+                            
+                            <li class="menu-subs">
+                                <a class="main-link" onclick="open"href="">Pedidos</a>
+                                <ul class="sub-menu">
+                                    <li><a href="" id="lentes" class="sub-link">Lentes</a></li>
+                                    <li><a href="" class="sub-link">Solucoes</a></li>
+                                    <li><a href="" class="sub-link">Cirurgico</a></li>
+                                </ul>
+                            
+                            </li>
+
+                            <li><a class="main-link" href="index.html">Backoffice</a></li>
+                            <li><a class="main-link" href="index.html">Deslogar</a></li>
+                        </ul>
+                    </md-content>
+                
+                </md-sidenav>
+                
+                <md-content class="background" layout-padding>
+                    <img class="logo" src="logo.png"/>
+                    
+                    <div class="formulario">
+
+                        <form>
+                            <md-input-container class="categorias_selecao">
+                                <label>Escolha um</label>
+                                <md-select ng-model="ctrl.userState">
+                                    <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
+                                        {{categoria.nome}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </form>
+                    </div>
+
+                </md-content>
+            </section>
+        </div>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+        
+        <script src="scripts/app.js"></script>
+        <script src="scripts/sidebar.js"></script>
+        <script src="scripts/compras.js"></script>
+        
+    
+    </body>
+
+</html>

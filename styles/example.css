@@ -27,3 +27,13 @@
 md-select {
     width: 300px;
 }
+
+.title {
+    height: 70px;
+    width: 70%;
+    margin-left: 15%;
+}
+
+input {
+    width: 50%;
+}
