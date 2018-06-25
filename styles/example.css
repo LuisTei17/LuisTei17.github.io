@@ -1,5 +1,29 @@
-.selecao_areas {
+
+.splitter {
+    width: 100%;
+    height: 2px;
+    background-color: #26A9BA;
+}
+
+.background {
+    width: 100%;
+    background-color: #efefef;
     position: relative;
-    left: 30%;
-    width: 500px;
+    padding: 2%;
+}
+
+.background h2 {
+    position: relative;
+    left: 35%;
+    width: 200px;
+    color: #26A9BA;
+}
+
+.background img {
+    position: relative;
+    left: 25%;
+}
+
+md-select {
+    width: 300px;
 }

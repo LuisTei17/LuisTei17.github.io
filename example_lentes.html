@@ -12,9 +12,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
-    <link rel="stylesheet" href="styles/landing.css">
-    <link rel="stylesheet" href="styles/example.css">
     <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/example.css">
     </head>
 
     <body ng-app="MyApp" ng-cloak>
@@ -26,20 +25,10 @@
                 md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
                             
                     <md-content class="content-list" layout-margin>
-                        <ul class="links-list">
-                            
-                            <li class="menu-subs">
-                                <a class="main-link" onclick="open"href="">Pedidos</a>
-                                <ul class="sub-menu">
-                                    <li><a href="" id="lentes" class="sub-link">Lentes</a></li>
-                                    <li><a href="" class="sub-link">Solucoes</a></li>
-                                    <li><a href="" class="sub-link">Cirurgico</a></li>
-                                </ul>
-                            
-                            </li>
-
-                            <li><a class="main-link" href="index.html">Backoffice</a></li>
-                            <li><a class="main-link" href="index.html">Deslogar</a></li>
+                        <ul class="lista_categoria">
+                            <li><a class="main-link" href="example_lentes.html">Compras</a></li>
+                            <li><a class="main-link" href="">Trocas</a></li>
+                            <li><a class="main-link" href="">Bonificacao</a></li>                            
                         </ul>
                     </md-content>
                 
@@ -47,7 +36,36 @@
                 
                 <md-content class="background" layout-padding>
                     <img class="logo" src="logo.png"/>
-                    
+                    <div class="splitter"></div>
+                    <h2>Compra de lentes</h2>
+                    <div class="title" layout="row" layout-align="space-between center">
+                        <span>Forma de compra</span>
+                        <md-select placeholder="{{categorias[0].nome}}" ng-model="ctrl.userState">
+                            <md-option><em>None</em></md-option>
+                            <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
+                            {{categoria.nome}}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="title" layout="row" layout-align="space-between center">
+                        <span>Forma de compra</span>
+                        <md-select placeholder="{{categorias[0].nome}}" ng-model="ctrl.userState">
+                            <md-option><em>None</em></md-option>
+                            <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
+                            {{categoria.nome}}
+                            </md-option>
+                        </md-select>
+                    </div>
+                    <div class="title" layout="row" layout-align="space-between center">
+                        <span>Forma de compra</span>
+                        <md-select placeholder="{{categorias[0].nome}}" ng-model="ctrl.userState">
+                            <md-option><em>None</em></md-option>
+                            <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
+                            {{categoria.nome}}
+                            </md-option>
+                        </md-select>
+                    </div>
+            
                 </md-content>
             </section>
         </div>
