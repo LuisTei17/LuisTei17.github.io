@@ -1,30 +1,34 @@
 
+
 .splitter {
     width: 100%;
-    height: 2px;
+    height: 1%;
     background-color: #26A9BA;
+    padding: 0px;
 }
 
 .background {
     width: 100%;
-    background-color: #efefef;
+    background-color: #f2f2f2;
     position: relative;
-    padding: 2%;
 }
 
-.background h2 {
-    position: relative;
-    left: 35%;
-    width: 200px;
+ h2 {
     color: #26A9BA;
+    margin-left: 40%;
+    
 }
 
-.background img {
+.sub-carrinho {
+    margin-left: 33%;
+}
+
+.logo {
     position: relative;
-    left: 25%;
+    left: 28%;
 }
 
-md-select {
+md-input-container {
     width: 300px;
 }
 
@@ -34,6 +38,58 @@ md-select {
     margin-left: 15%;
 }
 
-input {
-    width: 50%;
+.txt-inputs label {
+    margin-left: 15px;
+}
+
+.md-input-focused label, .md-input-focused span, select span  {
+    color: #26A9BA !important;
+}
+
+.md-input-focused input, .md-input-focused md-select-value{
+    border-color: #26A9BA !important;
+    border-bottom-color: #26A9BA !important;
+}
+
+.pad {
+
+    padding: 40px;
+}
+
+.shoppcart {
+    position: fixed;
+    bottom: 20px;
+    left: 90%;
+    border-radius: 100%;
+    height: 60px;
+    width: 60px;
+    background-color: #26A9BA;
+    padding: 14px;
+}
+
+.shoppcart i {
+    font-size: 35px;
+    color: #f1f1f1;
+}
+
+@media only screen and (max-width: 760px) {    
+    .logo {
+        left: 15%;
+    }
+}
+
+@media only screen and (max-width: 600px) {    
+    .logo {
+        left: 5%;
+    }
+}
+
+@media only screen and (max-width: 530px) {    
+    .logo {
+        left: 0%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
 }

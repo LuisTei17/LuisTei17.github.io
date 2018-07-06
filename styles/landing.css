@@ -1,41 +1,37 @@
-
-section {
-    width: 100%;
+img {
+    position: relative;
+    left: 27%;
 }
+
+.img {
+    position: relative;
+    left: 7%;
+}
+
 
 .logo {
     position: relative;
-    right: 100px;
-    width: 450px;
-    height: 58px;
-    margin-bottom: 30px;
-    left: 30%;
+    left: 25%;
+} 
+
+@media only screen and (max-width: 760px) {    
+    .logo, .img {
+        left: 15%;
+    }
 }
 
-.background {
-    width: 80%;
-    background-color: #efefef;
-    position: relative;
-    right: 5%;
+@media only screen and (max-width: 600px) {    
+    .logo, .img {
+        left: 5%;
+    }
 }
 
-.background div {
-    position: relative;
-    left: 5%;
+@media only screen and (max-width: 530px) {    
+    .logo, .img {
+        left: 1%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
 }
-
-.sidebar {
-    width: 20%;
-}
-
-
-.img {
-    margin-left: 100px;
-}
-
-.sidenav-button {
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 120px;
-}
-

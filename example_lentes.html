@@ -11,6 +11,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/example.css">
@@ -23,70 +24,150 @@
 
                 <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
                 md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
-                            
+                    <a href="landing.html"><i class="arrow-ico material-icons">
+                        keyboard_arrow_left
+                    </i></a>
+                    
                     <md-content class="content-list" layout-margin>
-                        <ul class="lista_categoria">
-                            <li><a class="main-link" href="example_lentes.html">Compras</a></li>
-                            <li><a class="main-link" href="">Trocas</a></li>
-                            <li><a class="main-link" href="">Bonificacao</a></li>                            
-                        </ul>
+                        <ul class="links-list">
+                                    <li class="menu-subs">
+                                        <a class="main-link" href="example_lentes.html">Pedidos</a>
+                                    </li>
+                                    <li><a class="main-link" href="index.html">Bonificações</a></li>
+                                    <li><a class="main-link" href="index.html">Relatórios</a></li>
+                                    <li><a class="main-link" href="index.html">Contato</a></li>
+                                    <li><a class="main-link" href="index.html">Pagamentos</a></li>
+                                    <li><a class="main-link" href="index.html">Backoffice</a></li>
+                                </ul>
                     </md-content>
                 
                 </md-sidenav>
                 
                 <md-content class="background" layout-padding>
-                    <img class="logo" src="logo.png"/>
+                    <img class="logo img-fluid" src="logo.png"/>
                     <div class="splitter"></div>
-                    <h2>Compra de lentes</h2>
-                    <div class="title" layout="row" layout-align="space-between center">
-                        <span>Forma de compra</span>
-                        <md-select placeholder="{{formas[0].nome}}" ng-model="ctrl.formasCompra">
-                            <md-option ng-repeat="forma in formas" ng-value="forma.nome">
-                            {{forma.nome}}
-                            </md-option>
-                        </md-select>
-                    </div>
-                    <div class="title" layout="row" layout-align="space-between center">
-                        <span>Forma de Faturamento</span>
-                        <md-select placeholder="{{tiposFaturamento[0].nome}}" ng-model="ctrl.formasFaturamento">
-                            <md-option ng-repeat="faturamento in tiposFaturamento" ng-value="faturamento.nome">
-                            {{faturamento.nome}}
-                            </md-option>
-                        </md-select>
-                    </div>
-                    <div class="title" layout="row" layout-align="space-between center">
-                        <span>Condicoes de pagamento</span>
-                        <md-select placeholder="Escolha uma condicao" ng-model="ctrl.condicoesDePagamento">
-                        <span ng-repeat="condicaoPagamento in condicoesPagamento">
-                                <span ng-repeat="(tipo,tiposPagamento) in condicaoPagamento">
-                                    {{tipo}}
-                                    <md-option ng-repeat="pagamento in tiposPagamento" ng-value="pagamento.nome">
-                                        {{pagamento.nome}}
+                    <div class="pad container">
+                        <h2>Pedidos</h2>
+
+                        <div class="row">
+                            <md-input-container class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" >
+                                <md-select ng-change="verificaArea()" placeholder="Area comercial" ng-model="ctrl.areaComercial">
+                                    <md-option ng-repeat="area in areasComerciais" ng-value="area.nome">
+                                        {{area.nome}}
                                     </md-option>
-                                </span>
-                            </md-select>
-                        </span>
+                                </md-select>
+                            </md-input-container>                            
+
+                            <md-input-container ng-if="areaEscolhida" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <md-select ng-change="verificaCategoria()" placeholder="Categorias" ng-model="ctrl.categorias">
+                                    <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
+                                        {{categoria.nome}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                                
+                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <md-select placeholder="Forma de compra" ng-model="ctrl.formasCompra">
+                                    <md-option ng-repeat="forma in formas" ng-value="forma.nome">
+                                        {{forma.nome}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            
+                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <md-select placeholder="Tipo de faturamento" ng-model="ctrl.formasFaturamento">
+                                    <md-option ng-repeat="faturamento in tiposFaturamento" ng-value="faturamento.nome">
+                                        {{faturamento.nome}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                                
+                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">    
+                                <md-select placeholder="Condicao" ng-model="ctrl.condicoesDePagamento">
+                                    <span ng-repeat="condicaoPagamento in condicoesPagamento">
+                                        <span ng-repeat="(tipo,tiposPagamento) in condicaoPagamento">
+                                            {{tipo}}
+                                            <md-option ng-repeat="pagamento in tiposPagamento" ng-value="pagamento.nome">
+                                                {{pagamento.nome}}
+                                            </md-option>
+                                        </span>
+                                    </span>
+                                </md-select>
+                            </md-input-container>
+                            
+                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="txt-inputs col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>Pedido Interno</label>
+                                <input ng-model="pedidoInterno">
+                            </md-input-container>
+                            
+                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="txt-inputs col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>Observação</label>
+                                <input ng-model="user.title">
+                            </md-input-container>
+                             
+                        </div>
+                        <div ng-if="categoriaEscolhida && areaEscolhida">
+                            <h2 class="sub-carrinho">Escolha seu produto</h2>
+                            <div class="row">
+                                <md-input-container class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" >
+                                    <md-select ng-change="verificaArea()" placeholder="Escolha sua família" ng-model="ctrl.familiacpr">
+                                        <md-option ng-repeat="familia in familias" ng-value="familia.nome">
+                                            {{familia.nome}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>                            
+    
+                                <md-input-container ng-if="areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                    <md-select ng-change="verificaCategoria()" placeholder="graue" ng-model="ctrl.grauecpd">
+                                        <md-option ng-repeat="grau in graus" ng-value="grau.nome">
+                                            {{grau.nome}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                    
+                                
+                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                    <md-select placeholder="Eixo" ng-model="ctrl.eixoCpr">
+                                        <md-option ng-repeat="eixo in eixos" ng-value="eixo.nome">
+                                            {{eixo.nome}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                    
+                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="txt-inputs col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                    <label>Quantidade</label>
+                                    <input ng-model="quantid">
+                                </md-input-container>
+                                
+                                
+                            </div>
+                            <br>
+                            <button class="btn btn-primary">Adicionar ao carrinho</button>
+                        </div>
                     </div>
-                    <div class="title" layout="row" layout-align="space-between center">
-                        <span>Pedido Interno do Cliente</span>
-                        <md-input-container>
-                            <label>Pedido Interno</label>
-                            <input ng-model="pedidoInterno">
-                        </md-input-container>
-                        
-                    </div>
-                    <div class="title" layout="row" layout-align="space-between center">
-                        <span>Observação NF</span>
-                        <md-input-container>
-                            <label>Observação</label>
-                            <input ng-model="user.title">
-                        </md-input-container>
-                    </div>
-            
+                    <button data-toggle="modal" data-target="#exampleModal" class="shoppcart"><i class="material-icons">
+                        shopping_cart
+                    </i></button>
                 </md-content>
             </section>
         </div>
-    
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                 
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+              
+                </div>
+              </div>
+            </div>
+          </div>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>

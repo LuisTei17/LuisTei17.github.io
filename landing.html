@@ -11,43 +11,43 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="styles/landing.css">
-    <link rel="stylesheet" href="styles/example.css">
     <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/landing.css">
     </head>
 
     <body ng-app="MyApp" ng-cloak>
-        <div ng-controller="AppCtrl as ctrl" layout="column" style="height:100%" ng-cloak>
+            <div ng-controller="AppCtrl as ctrl" layout="column" style="height:100%" ng-cloak>
             
-            <section layout="row" flex>
-
-                <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
-                md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
-                            
-                    <md-content class="content-list" layout-margin>
-                        <ul class="links-list">
-                            
-                            <li class="menu-subs">
-                                <a class="main-link" onclick="open"href="">Pedidos</a>
-                                <ul class="sub-menu">
-                                    <li><a href="" id="lentes" class="sub-link">Lentes</a></li>
-                                    <li><a href="" class="sub-link">Solucoes</a></li>
-                                    <li><a href="" class="sub-link">Cirurgico</a></li>
-                                </ul>
-                            
-                            </li>
-
-                            <li><a class="main-link" href="index.html">Backoffice</a></li>
-                            <li><a class="main-link" href="index.html">Deslogar</a></li>
-                        </ul>
-                    </md-content>
-                
-                </md-sidenav>
+                    <section layout="row" flex>
+        
+                        <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
+                        md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
+                            <a href="index.html">
+                                <i class="arrow-ico material-icons">
+                                    keyboard_arrow_left
+                                </i>
+                            </a>
+                          
+                            <md-content class="content-list" layout-margin>
+                                    <ul class="links-list">
+                                            <li class="menu-subs">
+                                                <a class="main-link" href="example_lentes.html">Pedidos</a>
+                                            </li>
+                                            <li><a class="main-link" href="index.html">Bonificações</a></li>
+                                            <li><a class="main-link" href="index.html">Relatórios</a></li>
+                                            <li><a class="main-link" href="index.html">Contato</a></li>
+                                            <li><a class="main-link" href="index.html">Pagamentos</a></li>
+                                            <li><a class="main-link" href="index.html">Backoffice</a></li>
+                                        </ul>
+                            </md-content>
+                        
+                        </md-sidenav>
                 
                 <md-content class="background" layout-padding>
-                    <img class="logo" src="logo.png"/>
-                    <img class="img" src="img_fundo.jpg"/>
+                    <img class="img-fluid logo" src="logo.png"/>
+                    <img class="img-fluid img" src="img_fundo.jpg"/>
                     
                 </md-content>
             </section>
