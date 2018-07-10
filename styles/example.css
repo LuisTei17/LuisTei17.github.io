@@ -47,13 +47,23 @@ md-input-container {
 md-card {
     box-shadow: 2px 3px 0 rgba(38, 169, 186, 0.3) !important;
     background-color: #26A9BA !important;
-    font-weight: bold !important;
-    
+    color: #f1f1f1 !important;
     
 }
 
-md-card span  {
-    color: #f1f1f1 !important;
+.bt-select {
+    background-color: #f1f1f1 !important;
+    color: #26A9BA !important;
+    font-weight: bold !important;
+}
+
+md-card p  {
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
+
+md-card h3 {
+    font-weight: bold !important;
 }
 
 .areaComercial {

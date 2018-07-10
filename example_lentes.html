@@ -73,7 +73,7 @@
                                         
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button ng-disabled="!areaEscolhida" ng-click="dialogClientes($event)">
+                                        <md-button  ng-click="dialogClientes($event)">
                                             Escolha seu cliente
                                         </md-button>
                                     </md-menu-item>
@@ -213,29 +213,31 @@
             </div>
             <div style="visibility:hidden">
                 <div class="md-dialog-container" id="clients">
-                    <md-dialog aria-label="Clientes" class="pad" flex="80">
-                        <md-dialog-content>
-                            <md-input-container class="lista md-block" flex-gt-xs>
-                                <div layout-gt-xs="row" >
-                                    <label>Cliente</label>
-                                    <input type="text" ng-model="pesquisa.nome">
+                    <md-dialog aria-label="Clientes" flex="60">
+                        <md-dialog-content style="padding: 20px">
+                            
+                            <div class="container">
+                                
+                                <md-input-container class="lista md-block" flex-gt-xs>
+                                    <div layout-gt-xs="row" >
+                                        <label>Cliente</label>
+                                        <input type="text" ng-model="pesquisa.nome">
+                                    </div>
+                                </md-input-container>
+                                    <h4>Escolha seu cliente</h4>
+                                <div class="row" style="margin: auto">
+                                        <md-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="cliente in clientes | filter:pesquisa" >
+                                        <md-card-title>
+                                            <md-card-title-text>
+                                            <h3 class="md-headline">{{ cliente.nome }}</h3>
+                                                <p ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</p>
+                                            </md-card-title-text>
+                                        </md-card-title>
+                                        <md-card-actions layout="row" layout-align="end center">
+                                            <md-button class="bt-select">Selecionar</md-button>
+                                        </md-card-actions>
+                                    </md-card>
                                 </div>
-                            </md-input-container>
-                                    
-                            <h4>Escolha seu cliente</h4>
-                            <div class="row container">
-                                <md-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3
-                                col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="cliente in clientes | filter:pesquisa" >
-                                    <md-card-title>
-                                        <md-card-title-text>
-                                            <span class="md-headline">{{ cliente.nome }}</span>
-                                            <span ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</span>
-                                        </md-card-title-text>
-                                    </md-card-title>
-                                    <md-card-actions layout="row" layout-align="end center">
-                                        <md-button class="bt-select">Selecionar</md-button>
-                                    </md-card-actions>
-                                </md-card>
                             </div>
                         </md-dialog-content>
                     </md-dialog>
