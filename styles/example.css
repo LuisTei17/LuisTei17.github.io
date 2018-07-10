@@ -39,25 +39,28 @@ md-input-container {
     width: 300px;
 }
 
-.bt-select {
-    background-color: #26A9BA !important;
-    color: #f1f1f1 !important;
-}
-
 md-card {
-    box-shadow: 2px 3px 0 rgba(38, 169, 186, 0.3) !important;
-    background-color: #26A9BA !important;
-    color: #f1f1f1 !important;
-    
+border: 0.4px solid #000000; 
+background-color: #F2F2F2; 
+}
+md-card .values {
+    text-align: right;
+
+}
+
+md-card .keys {
+    text-align: left;
 }
 
 .bt-select {
-    background-color: #f1f1f1 !important;
-    color: #26A9BA !important;
+    background-color: #26A9BA !important;
+    color: #f1f1f1 !important;
     font-weight: bold !important;
 }
 
 md-card p  {
+    color: #26A9BA;
+    margin: 0px;
     font-size: 16px !important;
     font-weight: bold !important;
 }

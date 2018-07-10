@@ -213,7 +213,7 @@
             </div>
             <div style="visibility:hidden">
                 <div class="md-dialog-container" id="clients">
-                    <md-dialog aria-label="Clientes" flex="60">
+                    <md-dialog aria-label="Clientes" flex="85">
                         <md-dialog-content style="padding: 20px">
                             
                             <div class="container">
@@ -226,11 +226,11 @@
                                 </md-input-container>
                                     <h4>Escolha seu cliente</h4>
                                 <div class="row" style="margin: auto">
-                                        <md-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="cliente in clientes | filter:pesquisa" >
+                                        <md-card class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4" ng-repeat="cliente in clientes | filter:pesquisa" >
                                         <md-card-title>
                                             <md-card-title-text>
                                             <h3 class="md-headline">{{ cliente.nome }}</h3>
-                                                <p ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</p>
+                                            <p ng-if="key != 'nome'" ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</p>
                                             </md-card-title-text>
                                         </md-card-title>
                                         <md-card-actions layout="row" layout-align="end center">

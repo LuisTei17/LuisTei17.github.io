@@ -109,13 +109,13 @@ angular
     ]
 
     $scope.clientes = [
-      {id:"1", nome:"Gabriel", codigo:"12312", tabela:"Contribuinte - bronze"},
-      {id:"2", nome:"Manera", codigo:"2131265", tabela:"Contribuinte - prata"},
-      {id:"3", nome:"Gustavo", codigo:"1221", tabela:"Contribuinte - ouro"},
-      {id:"4", nome:"Felipe", codigo:"83367", tabela:"Contribuinte - bronze"},
-      {id:"5", nome:"Ana", codigo:"7346", tabela: "Tabela AC-MS-PA-RR"},
-      {id:"6", nome:"Wander", codigo:"232352", tabela: "Tabela CE-PB-PE-SE-SP-TO"},
-      {id:"7", nome:"Luis", codigo:"34521", tabela: "Tabela MG-PR"}
+      {Id:"1", Razao:"Gabriel", 'CNPJ/CPF': 0213103012, 'Cidade/UF': 'Piraporâ/RS', codigo:"12312", tabela:"Contribuinte - bronze"},
+      {Id:"2", Razao:"Manera", 'CNPJ/CPF': 0213103012, 'Cidade/UF': 'Enchentes/RS', codigo:"2131265", tabela:"Contribuinte - prata"},
+      {Id:"3", Razao:"Gustavo", 'CNPJ/CPF': 0213103012, 'Cidade/UF': 'Arroio dos ratos/RS', codigo:"1221", tabela:"Contribuinte - ouro"},
+      {Id:"4", Razao:"Felipe", 'CNPJ/CPF': 0213103012, 'Cidade/UF': 'Porto Alegre/RS', codigo:"83367", tabela:"Contribuinte - bronze"},
+      {Id:"5", Razao:"Ana", 'CNPJ/CPF': 0213103012, 'Cidade/UF': 'Itaquacetuba/SP', codigo:"7346", tabela: "Tabela AC-MS-PA-RR"},
+      {Id:"6", Razao:"Wander", 'CNPJ/CPF': 0213103012, 'Cidade/UF': 'Belo Horizonte/MG', codigo:"232352", tabela: "Tabela CE-PB-PE-SE-SP-TO"},
+      {Id:"7", Razao:"Luis", 'CNPJ/CPF': 0213103012, 'Cidade/UF': 'Vitoria/ES', codigo:"34521", tabela: "Tabela MG-PR"}
       
     ]
    
