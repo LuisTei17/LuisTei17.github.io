@@ -73,7 +73,7 @@
                                         
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button data-toggle="modal" ng-disabled="!areaEscolhida" data-target="#cliModal">
+                                        <md-button ng-disabled="!areaEscolhida" ng-click="dialogClientes($event)">
                                             Escolha seu cliente
                                         </md-button>
                                     </md-menu-item>
@@ -211,55 +211,37 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="cliModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                         
+            <div style="visibility:hidden">
+                <div class="md-dialog-container" id="clients">
+                    <md-dialog aria-label="Clientes" class="pad" flex="80">
+                        <md-dialog-content>
+                            <md-input-container class="lista md-block" flex-gt-xs>
+                                <div layout-gt-xs="row" >
+                                    <label>Cliente</label>
+                                    <input type="text" ng-model="pesquisa.nome">
+                                </div>
+                            </md-input-container>
+                                    
+                            <h4>Escolha seu cliente</h4>
+                            <div class="row container">
+                                <md-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3
+                                col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="cliente in clientes | filter:pesquisa" >
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <span class="md-headline">{{ cliente.nome }}</span>
+                                            <span ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                    <md-card-actions layout="row" layout-align="end center">
+                                        <md-button class="bt-select">Selecionar</md-button>
+                                    </md-card-actions>
+                                </md-card>
                             </div>
-                            <div class="modal-body">
-                                <md-input-container class="lista md-block" flex-gt-xs>
-                                    <div layout-gt-xs="row" >
-                                                <label>Cliente</label>
-                                        <input type="text" ng-model="pesquisa.nome">
-                                    </div>
-                                    <div layout-gt-xs="row" >
-                                        <md-button class="md-raised md-primary">
-                                            Pesquisar
-                                        </md-button>
-                                    </div>
-                                </md-input-container>
-                                
-                                <md-list flex>
-                                    <h4>Escolha seu cliente</h4>
-                                    <md-grid-list
-                                        md-cols-gt-md="12" md-cols="3" md-cols-md="8"
-                                        md-row-height-gt-md="1:1" md-row-height="4:3"
-                                        md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px">
-                                        <md-card ng-repeat="cliente in clientes | filter:pesquisa" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-                                            <md-card-title>
-                                                <md-card-title-text>
-                                                    <span class="md-headline">{{ cliente.nome }}</span>
-                                                    <span ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</span>
-                                            <!--
-                                            <span class="md-subhead">Codigo: {{ cliente.codigo }}</span>
-                                            <span class="md-subhead">Id: {{ cliente.id }}</span>
-                                            <span class="md-subhead">Id: {{ cliente.id }}</span>
-                                            <span class="md-subhead">Id: {{ cliente.id }}</span>
-                                        -->    
-                                                </md-card-title-text>
-                                            </md-card-title>
-                                            <md-card-actions layout="row" layout-align="end center">
-                                                <md-button class="bt-select">Selecionar</md-button>
-                                            </md-card-actions>
-                                    </md-card>
-                                </md-list>
-                            </div>
-                        </div>
-                    </div>
+                        </md-dialog-content>
+                    </md-dialog>
                 </div>
             </div>
-                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>

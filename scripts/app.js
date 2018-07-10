@@ -11,7 +11,7 @@ angular
       };
     }
 
-    $scope.dialogClientes = function() {
+    $scope.dialogClientes = function(ev) {
       $mdDialog.show({
         contentElement: '#clients',
         parent: angular.element(document.body),
