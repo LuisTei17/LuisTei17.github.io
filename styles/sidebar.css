@@ -1,3 +1,7 @@
+md-menu-bar.md-default-theme md-menu.md-open > button, md-menu-bar md-menu.md-open > button, md-menu-bar.md-default-theme md-menu > button:focus, md-menu-bar md-menu > button:focus {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
 .arrow-ico {
     font-weight: bold;
     margin-left: 5%;
@@ -26,8 +30,30 @@
     margin-top: 30px;
 }
 
+.md-primary {
+    background-color: #26A9BA !important;
+}
 
+.profile-icon {
 
+    position: relative;
+    height: 60px !important;
+    width: 75px !important;
+    
+    bottom: 45px;
+}
+.profile-icon i {
+    color: #26A9BA;
+    font-size: 40px;
+}
+
+.label-profile {
+    color: #f1f1f1;
+    position: relative;
+    bottom: 60px;
+    left: 16%;
+    display: inline-block;
+}
 
 .close {
     min-width: 50px;
@@ -51,11 +77,15 @@
     
 }
 
+.lista {
+    width: 100% !important;
+}
+
 .content-list {
     font-weight: bold;
     position: relative;
     height: 50%;
-    top:10px;
+    bottom: 80px;
 }
 
 .lista_categoria li, .links-list li {

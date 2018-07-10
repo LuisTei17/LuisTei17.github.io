@@ -7,6 +7,7 @@
     <title>Landing page</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
@@ -15,6 +16,8 @@
 
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/example.css">
+
+    
     </head>
 
     <body ng-app="MyApp" ng-cloak>
@@ -27,7 +30,10 @@
                     <a href="landing.html"><i class="arrow-ico material-icons">
                         keyboard_arrow_left
                     </i></a>
-                    
+                   
+                        <p class="label-profile">Admin</p>
+
+                        
                     <md-content class="content-list" layout-margin>
                         <ul class="links-list">
                                     <li class="menu-subs">
@@ -45,20 +51,61 @@
                 
                 <md-content class="background" layout-padding>
                     <img class="logo img-fluid" src="logo.png"/>
+                    <md-menu-bar>
+
+                            <md-menu class="menu-profile">
+                                <md-button aria-label="Open phone interactions menu" class="profile-icon md-icon-button" ng-click="$mdOpenMenu()">
+                                    <i class="profile material-icons">
+                                        account_circle
+                                    </i>
+                                </md-button>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-menu>
+                                            <md-button ng-click="$mdOpenMenu()">
+                                                <span ng-if="!areaEscolhida">Escolher área comercial</span>
+                                                <span ng-if="areaEscolhida">{{areasComercial}}</span>
+                                            </md-button>
+                                            <md-menu-content>
+                                                <md-menu-item ng-repeat="area in areasComerciais">
+                                                    <md-button ng-click="verificaArea(area)">{{ area.nome }}</md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                        
+                                        
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button data-toggle="modal" data-target="#cliModal">
+                                            Escolha seu cliente
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-divider></md-menu-divider>
+                                    <md-menu-item>
+                                        <md-button>
+                                            Deslogar
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                            </md-menu-bar>
                     <div class="splitter"></div>
                     <div class="pad container">
-                        <h2>Pedidos</h2>
+                        <h2>Pedidos
 
+                            <span class="areaComercial" ng-if="areaEscolhida"> para {{ areasComercial }}</span>
+                        </h2>
+                        <md-card ng-if="!areaEscolhida" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                                <md-card-title>
+                                  <md-card-title-text>
+                                    <span class="md-headline">Olá Admin</span>
+                                    <span class="md-subhead">Por favor, clique no ícone ao lado do seu nome para escolher a área comercial</span>
+                                  </md-card-title-text>
+                                </md-card-title>
+                              </md-card>
                         <div class="row">
-                            <md-input-container class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-                                <md-select ng-change="verificaArea()" placeholder="Area comercial" ng-model="ctrl.areaComercial">
-                                    <md-option ng-repeat="area in areasComerciais" ng-value="area.nome">
-                                        {{area.nome}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>                            
 
-                            <md-input-container ng-if="areaEscolhida" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <md-input-container ng-if="areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <md-select ng-change="verificaCategoria()" placeholder="Categorias" ng-model="ctrl.categorias">
                                     <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
                                         {{categoria.nome}}
@@ -142,7 +189,7 @@
                                 
                             </div>
                             <br>
-                            <button class="btn btn-primary">Adicionar ao carrinho</button>
+                            <button class="bt-add-shoppcart btn btn-primary">Adicionar ao carrinho</button>
                         </div>
                     </div>
                     <button data-toggle="modal" data-target="#exampleModal" class="shoppcart"><i class="material-icons">
@@ -150,25 +197,61 @@
                     </i></button>
                 </md-content>
             </section>
-        </div>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                 
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-              
-                </div>
-              </div>
             </div>
-          </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+            <div class="modal fade" id="cliModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                         
+                            </div>
+                            <div class="modal-body">
+                                <md-input-container class="lista md-block" flex-gt-xs>
+                                    <div layout-gt-xs="row" >
+                                                <label>Pesquisar</label>
+                                        <input type="text">
+                                    </div>
+                                    <div layout-gt-xs="row" >
+                                        <md-button class="md-raised md-primary">
+                                            Pesquisar
+                                        </md-button>
+                                    </div>
+                                </md-input-container>
+                                
+                                <md-list flex>
+                                    <h4>Escolha seu cliente</h4>
+                                    <md-list-item class="md-3-line" ng-repeat="cliente in clientes" ng-click="null">
+                                        <p>{{ cliente.id }}</p>
+                                        <div class="md-list-item-text" layout="column">
+                                            <h3>{{ cliente.nome }}</h3>
+                                            <h4>{{ cliente.codigo }}</h4>
+                                        </div>
+                                        <md-button class="md-raised md-primary">Selecionar</md-button>
+
+                                    </md-list-item>
+                                </md-list>
+                            </div>
+                            <div class="modal-footer">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>

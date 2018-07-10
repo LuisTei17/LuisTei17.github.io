@@ -1,7 +1,7 @@
 angular
   .module('MyApp', ['ngMaterial'])
-  .controller('AppCtrl', function ($scope, $mdSidenav) {
-    $scope.areaEscolhida = false;
+  .controller('AppCtrl', function ($scope, $mdSidenav, $mdDialog) {
+    $scope.areaEscolhida      = false;
     $scope.categoriaEscolhida = false;
     function buildToggler(componentId) {
       return function() {
@@ -11,9 +11,11 @@ angular
       };
     }
 
-    $scope.verificaArea = function() {
-      console.log("aaa")
-      $scope.areaEscolhida = true;
+    
+    $scope.verificaArea = function(area) {
+
+      $scope.areaEscolhida  = true;
+      $scope.areasComercial = area.nome;
     };
 
     $scope.verificaCategoria = function() {
@@ -22,7 +24,7 @@ angular
     $scope.toggleLeft = buildToggler('left');
     $scope.categoria = {nome:"Escolha uma categoria"};
     $scope.categorias = [
-      {nome:"compras"},
+      {nome:"Compras"},
       {nome:"Amostras"},
       {nome:"Trocas"},
       {nome:"Devoluções"}
@@ -93,8 +95,17 @@ angular
       {nome:"6"}
     ]
 
-    
-    
+    $scope.clientes = [
+      {nome:"Gabriel", codigo:"12312", id:"1"},
+      {nome:"Manera", codigo:"2131265", id:"2"},
+      {nome:"Gustavo", codigo:"1221", id:"3"},
+      {nome:"Felipe", codigo:"83367", id:"4"},
+      {nome:"Ana", codigo:"7346", id:"5"},
+      {nome:"Wander", codigo:"232352", id:"6"},
+      {nome:"Luis", codigo:"34521", id:"7"}
+      
+    ]
+   
 
 
 
