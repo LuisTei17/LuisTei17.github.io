@@ -11,9 +11,22 @@ angular
       };
     }
 
-    
-    $scope.verificaArea = function(area) {
+    $scope.dialogClientes = function() {
+      $mdDialog.show({
+        contentElement: '#clients',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      });
+    }
 
+    $scope.verificaFamilia = function(familia) {
+      $scope.familiaEscolhida = true;
+      
+    }
+
+    $scope.verificaArea = function(area) {
       $scope.areaEscolhida  = true;
       $scope.areasComercial = area.nome;
     };
@@ -96,13 +109,13 @@ angular
     ]
 
     $scope.clientes = [
-      {nome:"Gabriel", codigo:"12312", id:"1"},
-      {nome:"Manera", codigo:"2131265", id:"2"},
-      {nome:"Gustavo", codigo:"1221", id:"3"},
-      {nome:"Felipe", codigo:"83367", id:"4"},
-      {nome:"Ana", codigo:"7346", id:"5"},
-      {nome:"Wander", codigo:"232352", id:"6"},
-      {nome:"Luis", codigo:"34521", id:"7"}
+      {id:"1", nome:"Gabriel", codigo:"12312", tabela:"Contribuinte - bronze"},
+      {id:"2", nome:"Manera", codigo:"2131265", tabela:"Contribuinte - prata"},
+      {id:"3", nome:"Gustavo", codigo:"1221", tabela:"Contribuinte - ouro"},
+      {id:"4", nome:"Felipe", codigo:"83367", tabela:"Contribuinte - bronze"},
+      {id:"5", nome:"Ana", codigo:"7346", tabela: "Tabela AC-MS-PA-RR"},
+      {id:"6", nome:"Wander", codigo:"232352", tabela: "Tabela CE-PB-PE-SE-SP-TO"},
+      {id:"7", nome:"Luis", codigo:"34521", tabela: "Tabela MG-PR"}
       
     ]
    

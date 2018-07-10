@@ -30,9 +30,6 @@
                     <a href="landing.html"><i class="arrow-ico material-icons">
                         keyboard_arrow_left
                     </i></a>
-                   
-                        <p class="label-profile">Admin</p>
-
                         
                     <md-content class="content-list" layout-margin>
                         <ul class="links-list">
@@ -68,7 +65,7 @@
                                             </md-button>
                                             <md-menu-content>
                                                 <md-menu-item ng-repeat="area in areasComerciais">
-                                                    <md-button ng-click="verificaArea(area)">{{ area.nome }}</md-button>
+                                                    <md-button ng-click="verificaArea(area)" >{{ area.nome }}</md-button>
                                                 </md-menu-item>
                                             </md-menu-content>
                                         </md-menu>
@@ -76,7 +73,7 @@
                                         
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button data-toggle="modal" data-target="#cliModal">
+                                        <md-button data-toggle="modal" ng-disabled="!areaEscolhida" data-target="#cliModal">
                                             Escolha seu cliente
                                         </md-button>
                                     </md-menu-item>
@@ -99,7 +96,7 @@
                                 <md-card-title>
                                   <md-card-title-text>
                                     <span class="md-headline">Olá Admin</span>
-                                    <span class="md-subhead">Por favor, clique no ícone ao lado do seu nome para escolher a área comercial</span>
+                                    <span class="md-subhead">Por favor, clique no ícone para escolher a área comercial</span>
                                   </md-card-title-text>
                                 </md-card-title>
                               </md-card>
@@ -156,16 +153,16 @@
                         <div ng-if="categoriaEscolhida && areaEscolhida">
                             <h2 class="sub-carrinho">Escolha seu produto</h2>
                             <div class="row">
-                                <md-input-container class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" >
-                                    <md-select ng-change="verificaArea()" placeholder="Escolha sua família" ng-model="ctrl.familiacpr">
+                                <md-input-container ng-if="areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" >
+                                    <md-select ng-change="verificaFamilia()" placeholder="Escolha sua família" ng-model="ctrl.familiacpr">
                                         <md-option ng-repeat="familia in familias" ng-value="familia.nome">
                                             {{familia.nome}}
                                         </md-option>
                                     </md-select>
                                 </md-input-container>                            
     
-                                <md-input-container ng-if="areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                                    <md-select ng-change="verificaCategoria()" placeholder="graue" ng-model="ctrl.grauecpd">
+                                <md-input-container ng-if="areaEscolhida && familiaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                    <md-select placeholder="graue" ng-model="ctrl.grauecpd">
                                         <md-option ng-repeat="grau in graus" ng-value="grau.nome">
                                             {{grau.nome}}
                                         </md-option>
@@ -173,7 +170,7 @@
                                 </md-input-container>
                                     
                                 
-                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida && familiaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                                     <md-select placeholder="Eixo" ng-model="ctrl.eixoCpr">
                                         <md-option ng-repeat="eixo in eixos" ng-value="eixo.nome">
                                             {{eixo.nome}}
@@ -181,7 +178,7 @@
                                     </md-select>
                                 </md-input-container>
                                     
-                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="txt-inputs col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida && familiaEscolhida" class="txt-inputs col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                                     <label>Quantidade</label>
                                     <input ng-model="quantid">
                                 </md-input-container>
@@ -201,10 +198,12 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            
+                            <h2>
+                                Carrinho de compras
+                            </h2>
                         </div>
                         <div class="modal-body">
-                            ...
+                            
                         </div>
                         <div class="modal-footer">
                             
@@ -221,8 +220,8 @@
                             <div class="modal-body">
                                 <md-input-container class="lista md-block" flex-gt-xs>
                                     <div layout-gt-xs="row" >
-                                                <label>Pesquisar</label>
-                                        <input type="text">
+                                                <label>Cliente</label>
+                                        <input type="text" ng-model="pesquisa.nome">
                                     </div>
                                     <div layout-gt-xs="row" >
                                         <md-button class="md-raised md-primary">
@@ -233,19 +232,28 @@
                                 
                                 <md-list flex>
                                     <h4>Escolha seu cliente</h4>
-                                    <md-list-item class="md-3-line" ng-repeat="cliente in clientes" ng-click="null">
-                                        <p>{{ cliente.id }}</p>
-                                        <div class="md-list-item-text" layout="column">
-                                            <h3>{{ cliente.nome }}</h3>
-                                            <h4>{{ cliente.codigo }}</h4>
-                                        </div>
-                                        <md-button class="md-raised md-primary">Selecionar</md-button>
-
-                                    </md-list-item>
+                                    <md-grid-list
+                                        md-cols-gt-md="12" md-cols="3" md-cols-md="8"
+                                        md-row-height-gt-md="1:1" md-row-height="4:3"
+                                        md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px">
+                                        <md-card ng-repeat="cliente in clientes | filter:pesquisa" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                                            <md-card-title>
+                                                <md-card-title-text>
+                                                    <span class="md-headline">{{ cliente.nome }}</span>
+                                                    <span ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</span>
+                                            <!--
+                                            <span class="md-subhead">Codigo: {{ cliente.codigo }}</span>
+                                            <span class="md-subhead">Id: {{ cliente.id }}</span>
+                                            <span class="md-subhead">Id: {{ cliente.id }}</span>
+                                            <span class="md-subhead">Id: {{ cliente.id }}</span>
+                                        -->    
+                                                </md-card-title-text>
+                                            </md-card-title>
+                                            <md-card-actions layout="row" layout-align="end center">
+                                                <md-button class="bt-select">Selecionar</md-button>
+                                            </md-card-actions>
+                                    </md-card>
                                 </md-list>
-                            </div>
-                            <div class="modal-footer">
-                                
                             </div>
                         </div>
                     </div>

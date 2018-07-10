@@ -85,7 +85,6 @@ md-menu-bar.md-default-theme md-menu.md-open > button, md-menu-bar md-menu.md-op
     font-weight: bold;
     position: relative;
     height: 50%;
-    bottom: 80px;
 }
 
 .lista_categoria li, .links-list li {
