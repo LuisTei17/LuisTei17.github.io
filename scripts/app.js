@@ -1,13 +1,20 @@
 angular
-  .module('MyApp', ['ngMaterial'])
+  .module('MyApp', ['ngMaterial', 'md.data.table'])
   .controller('AppCtrl', function ($scope, $mdSidenav, $mdDialog) {
     $scope.areaEscolhida      = false;
+    $scope.clienteEscolhido      = false;
     $scope.categoriaEscolhida = false;
     function buildToggler(componentId) {
       return function() {
         $mdSidenav(componentId).toggle();
         let botaoSide = document.getElementsByClassName(".sidenav-button");
         
+      };
+    }
+
+    $scope.verificaClienteEscolhido = function (ev) {
+      if($scope.clienteEscolhido) {
+        $scope.dialogCart(ev);
       };
     }
 
@@ -32,7 +39,8 @@ angular
     }
 
     $scope.escolheCliente = function(cliente) {
-      $scope.cliente = cliente;
+      $scope.clienteEscolhido = true;
+      $scope.cliente          = cliente;
     }
 
     $scope.verificaFamilia = function(familia) {

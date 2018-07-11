@@ -12,7 +12,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/example.css">
@@ -186,10 +186,18 @@
                                 
                             </div>
                             <br>
-                            <button class="bt-add-shoppcart btn btn-primary">Adicionar ao carrinho</button>
+                            <md-button class="bt-add-shoppcart md-raised md-primary">Adicionar ao carrinho</md-button>
                         </div>
                     </div>
-                    <button ng-click="dialogCart($event)" class="shoppcart"><i class="material-icons">
+                    <button ng-click="verificaClienteEscolhido($event)" class="shoppcart">
+                        
+                        <md-tooltip
+                        md-direction="{{demo.tipDirection}}">
+                        <span ng-if="!clienteEscolhido">Por favor, escolha o cliente</span>
+                        <span ng-if="clienteEscolhido">Cliente: {{ cliente.Razao }}</span>
+                      </md-tooltip>
+                        
+                        <i class="material-icons">
                         shopping_cart
                     </i></button>
                 </md-content>
@@ -209,28 +217,29 @@
                                     </div>
                                 </md-input-container>
                                 <h4>Escolha seu cliente</h4>
-                                <table class="table table-striped">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Razao</th>
-                                        <th scope="col">CNPJ/CPF</th>
-                                        <th scope="col">Cidade/UF</th>
-                                        <th scope="col">Tabela</th>
-                                        <th scope="col">#</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr ng-repeat="cliente in clientes | filter:pesquisa">
-                                        <td>{{cliente.codigo}}</td>
-                                        <td>{{cliente.Razao}}</td>
-                                        <td>{{cliente['CNPJ/CPF']}}</td>
-                                        <td>{{cliente['Cidade/UF']}}</td>
-                                        <td>{{cliente.tabela}}</td>
-                                        <td><md-button class="btn btn-primary bt-select" ng-click="escolheCliente(cliente)">Selecionar</md-button> </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
+                                <md-table-container>
+
+                                    <table md-table>
+                                        <thead md-head>
+                                            <th md-column>ID</th>
+                                            <th md-column>Razao</th>
+                                            <th md-column>CNPJ/CPF</th>
+                                            <th md-column>Cidade/UF</th>
+                                            <th md-column>Tabela</th>
+                                            <th md-column></th>
+                                        </thead>
+                                        <tbody md-body>
+                                            <tr ng-repeat="cliente in clientes | filter:pesquisa">
+                                                <td md-cell>{{cliente.codigo}}</td>
+                                                <td md-cell>{{cliente.Razao}}</td>
+                                                <td md-cell>{{cliente['CNPJ/CPF']}}</td>
+                                                <td md-cell>{{cliente['Cidade/UF']}}</td>
+                                                <td md-cell>{{cliente.tabela}}</td>
+                                                <td md-cell><md-button ng-click="escolheCliente(cliente)">Selecionar</md-button> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                            </md-table-container>
                             </div>
                         </md-dialog-content>
                     </md-dialog>
@@ -241,50 +250,56 @@
                                     
                                         
                                      
-                                        <h4>Carrinho de compras</h4>
+                                        <h4>Carrinho de compras para o cliente: {{ cliente.Razao }}</h4>
                                         <p> Existem {{(produtosCarrinho|filter:pesquisa).length}} itens</p>
-                                        <table class="table table-striped">
-                                            <thead>
-                                              <tr>
-                                                <th scope="col">Familia</th>
-                                                <th scope="col">Grau Esférico</th>
-                                                <th scope="col">Grau Cilíndrico</th>
-                                                <th scope="col">Eixo</th>
-                                                <th scope="col">Adição</th>
-                                                <th scope="col">Curva</th>
-                                                <th scope="col">Cor</th>
-                                                <th scope="col">Diâmetro</th>
-                                                <th scope="col">Olho</th>
-                                                <th scope="col">Quantidade</th>
-                                                <th scope="col">Valor unitário</th>
-                                                <th scope="col">Desconto (%)</th>
-                                                <th scope="col">Valor final</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">#</th>
+                                        <md-table-container>
 
+                                            <table md-table>
+                                                <thead md-head>
+                                                <tr>
+                                                    <th md-column>Familia</th>
+                                                    <th md-column>Grau Esférico</th>
+                                                    <th md-column>Grau Cilíndrico</th>
+                                                    <th md-column>Eixo</th>
+                                                    <th md-column>Adição</th>
+                                                    <th md-column>Curva</th>
+                                                    <th md-column>Cor</th>
+                                                    <th md-column>Diâmetro</th>
+                                                    <th md-column>Olho</th>
+                                                    <th md-column>Quantidade</th>
+                                                    <th md-column>Valor unitário</th>
+                                                    <th md-column>Desconto (%)</th>
+                                                    <th md-column>Valor final</th>
+                                                    <th md-column>Total</th>
+                                                    <th md-column></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody md-body>
+                                                <tr ng-repeat="produto in produtosCarrinho | filter:pesquisa">
+                                                    <td md-cell>{{produto.familia}}</td>
+                                                    <td md-cell>{{produto.graue}}</td>
+                                                    <td md-cell>{{produto.grauc}}</td>
+                                                    <td md-cell>{{produto.eixo}}</td>
+                                                    <td md-cell>{{produto.adicao}}</td>
+                                                    <td md-cell>{{produto.curva}}</td>
+                                                    <td md-cell>{{produto.cor}}</td>
+                                                    <td md-cell>{{produto.diametro}} %</td>
+                                                    <td md-cell>{{produto.olho}}</td>
+                                                    <td md-cell>{{produto.qtd}}</td>
+                                                    <td md-cell>{{produto.unitario}}</td>
+                                                    <td md-cell>{{produto.desconto}}</td>
+                                                    <td md-cell>{{produto.final}}</td>
+                                                    <td md-cell>{{produto.total}}</td>
+                                                    <td md-cell><md-button ng-click="remove()">
+                                                            <i class="remove-cart material-icons">
+                                                                    remove_shopping_cart
 
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr ng-repeat="produto in produtosCarrinho | filter:pesquisa">
-                                                <td>{{produto.familia}}</td>
-                                                <td>{{produto.graue}}</td>
-                                                <td>{{produto.grauc}}</td>
-                                                <td>{{produto.eixo}}</td>
-                                                <td>{{produto.adicao}}</td>
-                                                <td>{{produto.curva}}</td>
-                                                <td>{{produto.cor}}</td>
-                                                <td>{{produto.diametro}}</td>
-                                                <td>{{produto.olho}}</td>
-                                                <td>{{produto.qtd}}</td>
-                                                <td>{{produto.unitario}}</td>
-                                                <td>{{produto.desconto}}</td>
-                                                <td>{{produto.final}}</td>
-                                                <td>{{produto.total}}</td>
-                                                <td><md-button class="btn btn-primary bt-select" ng-click="remove()">Selecionar</md-button> </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
+                                                                </i>
+                                                    </md-button></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </md-table-container>
                                           <md-button class="btn btn-primary bt-select" ng-click="remove()">Agrupar</md-button>
                                           <md-button class="btn btn-primary bt-select" ng-click="remove()">Finalizar</md-button>
                                     </div>
@@ -297,9 +312,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+
 
         
         <script src="scripts/app.js"></script>
