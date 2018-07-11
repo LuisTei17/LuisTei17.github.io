@@ -21,6 +21,10 @@ angular
       });
     }
 
+    $scope.escolheCliente = function(cliente) {
+      $scope.cliente = cliente;
+    }
+
     $scope.verificaFamilia = function(familia) {
       $scope.familiaEscolhida = true;
       

@@ -73,7 +73,7 @@
                                         
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button  ng-click="dialogClientes($event)">
+                                        <md-button  ng-disabled="!areaEscolhida" ng-click="dialogClientes($event)">
                                             Escolha seu cliente
                                         </md-button>
                                     </md-menu-item>
@@ -194,23 +194,7 @@
                     </i></button>
                 </md-content>
             </section>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2>
-                                Carrinho de compras
-                            </h2>
-                        </div>
-                        <div class="modal-body">
-                            
-                        </div>
-                        <div class="modal-footer">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div style="visibility:hidden">
                 <div class="md-dialog-container" id="clients">
                     <md-dialog aria-label="Clientes" flex="85">
@@ -221,26 +205,74 @@
                                 <md-input-container class="lista md-block" flex-gt-xs>
                                     <div layout-gt-xs="row" >
                                         <label>Cliente</label>
-                                        <input type="text" ng-model="pesquisa.nome">
+                                        <input type="text" ng-model="pesquisa.Razao">
                                     </div>
                                 </md-input-container>
-                                    <h4>Escolha seu cliente</h4>
-                                <div class="row" style="margin: auto">
-                                        <md-card class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4" ng-repeat="cliente in clientes | filter:pesquisa" >
-                                        <md-card-title>
-                                            <md-card-title-text>
-                                            <h3 class="md-headline">{{ cliente.nome }}</h3>
-                                            <p ng-if="key != 'nome'" ng-repeat="(key, val) in cliente" class="md-subhead">{{key}}: {{ val }}</p>
-                                            </md-card-title-text>
-                                        </md-card-title>
-                                        <md-card-actions layout="row" layout-align="end center">
-                                            <md-button class="bt-select">Selecionar</md-button>
-                                        </md-card-actions>
-                                    </md-card>
-                                </div>
+                                <h4>Escolha seu cliente</h4>
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Razao</th>
+                                        <th scope="col">CNPJ/CPF</th>
+                                        <th scope="col">Cidade/UF</th>
+                                        <th scope="col">Tabela</th>
+                                        <th scope="col">#</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ng-repeat="cliente in clientes | filter:pesquisa">
+                                        <td>{{cliente.codigo}}</td>
+                                        <td>{{cliente.Razao}}</td>
+                                        <td>{{cliente['CNPJ/CPF']}}</td>
+                                        <td>{{cliente['Cidade/UF']}}</td>
+                                        <td>{{cliente.tabela}}</td>
+                                        <td><md-button class="btn btn-primary bt-select" ng-click="escolheCliente(cliente)">Selecionar</md-button> </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
                             </div>
                         </md-dialog-content>
                     </md-dialog>
+                    <div style="visibility:hidden">
+                        <div class="md-dialog-container" id="cart">
+                            <md-dialog aria-label="Carrinho" flex="85">
+                                <md-dialog-content style="padding: 20px">
+                                    
+                                    <div class="container">
+                                        
+                                        <md-input-container class="lista md-block" flex-gt-xs>
+                                            <div layout-gt-xs="row" >
+                                                <label>Cliente</label>
+                                                <input type="text" ng-model="pesquisa.Razao">
+                                            </div>
+                                        </md-input-container>
+                                        <h4>Carrinho de compras</h4>
+                                        <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Razao</th>
+                                                <th scope="col">CNPJ/CPF</th>
+                                                <th scope="col">Cidade/UF</th>
+                                                <th scope="col">Tabela</th>
+                                                <th scope="col">#</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr ng-repeat="cliente in clientes | filter:pesquisa">
+                                                <td>{{cliente.codigo}}</td>
+                                                <td>{{cliente.Razao}}</td>
+                                                <td>{{cliente['CNPJ/CPF']}}</td>
+                                                <td>{{cliente['Cidade/UF']}}</td>
+                                                <td>{{cliente.tabela}}</td>
+                                                <td><md-button class="btn btn-primary bt-select" ng-click="escolheCliente(cliente)">Selecionar</md-button> </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                    </div>
+                                </md-dialog-content>
+                            </md-dialog>
                 </div>
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
