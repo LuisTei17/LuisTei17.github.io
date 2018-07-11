@@ -242,6 +242,7 @@
                                         
                                      
                                         <h4>Carrinho de compras</h4>
+                                        <p> Existem {{(produtosCarrinho|filter:pesquisa).length}} itens</p>
                                         <table class="table table-striped">
                                             <thead>
                                               <tr>
@@ -284,6 +285,8 @@
                                               </tr>
                                             </tbody>
                                           </table>
+                                          <md-button class="btn btn-primary bt-select" ng-click="remove()">Agrupar</md-button>
+                                          <md-button class="btn btn-primary bt-select" ng-click="remove()">Finalizar</md-button>
                                     </div>
                                 </md-dialog-content>
                             </md-dialog>

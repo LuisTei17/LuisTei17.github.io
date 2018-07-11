@@ -29,7 +29,8 @@ md-menu-bar {
     
 }
 
-thead {
+thead th {
+    text-align: center;
     background-color: #26A9BA;
     color: #f1f1f1;
 }
