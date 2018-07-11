@@ -189,7 +189,7 @@
                             <button class="bt-add-shoppcart btn btn-primary">Adicionar ao carrinho</button>
                         </div>
                     </div>
-                    <button data-toggle="modal" data-target="#exampleModal" class="shoppcart"><i class="material-icons">
+                    <button ng-click="dialogCart($event)" class="shoppcart"><i class="material-icons">
                         shopping_cart
                     </i></button>
                 </md-content>
@@ -209,7 +209,7 @@
                                     </div>
                                 </md-input-container>
                                 <h4>Escolha seu cliente</h4>
-                                <table class="table">
+                                <table class="table table-striped">
                                     <thead>
                                       <tr>
                                         <th scope="col">ID</th>
@@ -236,37 +236,51 @@
                     </md-dialog>
                     <div style="visibility:hidden">
                         <div class="md-dialog-container" id="cart">
-                            <md-dialog aria-label="Carrinho" flex="85">
+                            <md-dialog aria-label="Carrinho" flex="95">
                                 <md-dialog-content style="padding: 20px">
                                     
-                                    <div class="container">
                                         
-                                        <md-input-container class="lista md-block" flex-gt-xs>
-                                            <div layout-gt-xs="row" >
-                                                <label>Cliente</label>
-                                                <input type="text" ng-model="pesquisa.Razao">
-                                            </div>
-                                        </md-input-container>
+                                     
                                         <h4>Carrinho de compras</h4>
-                                        <table class="table">
+                                        <table class="table table-striped">
                                             <thead>
                                               <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Razao</th>
-                                                <th scope="col">CNPJ/CPF</th>
-                                                <th scope="col">Cidade/UF</th>
-                                                <th scope="col">Tabela</th>
+                                                <th scope="col">Familia</th>
+                                                <th scope="col">Grau Esférico</th>
+                                                <th scope="col">Grau Cilíndrico</th>
+                                                <th scope="col">Eixo</th>
+                                                <th scope="col">Adição</th>
+                                                <th scope="col">Curva</th>
+                                                <th scope="col">Cor</th>
+                                                <th scope="col">Diâmetro</th>
+                                                <th scope="col">Olho</th>
+                                                <th scope="col">Quantidade</th>
+                                                <th scope="col">Valor unitário</th>
+                                                <th scope="col">Desconto (%)</th>
+                                                <th scope="col">Valor final</th>
+                                                <th scope="col">Total</th>
                                                 <th scope="col">#</th>
+
+
                                               </tr>
                                             </thead>
                                             <tbody>
-                                              <tr ng-repeat="cliente in clientes | filter:pesquisa">
-                                                <td>{{cliente.codigo}}</td>
-                                                <td>{{cliente.Razao}}</td>
-                                                <td>{{cliente['CNPJ/CPF']}}</td>
-                                                <td>{{cliente['Cidade/UF']}}</td>
-                                                <td>{{cliente.tabela}}</td>
-                                                <td><md-button class="btn btn-primary bt-select" ng-click="escolheCliente(cliente)">Selecionar</md-button> </td>
+                                              <tr ng-repeat="produto in produtosCarrinho | filter:pesquisa">
+                                                <td>{{produto.familia}}</td>
+                                                <td>{{produto.graue}}</td>
+                                                <td>{{produto.grauc}}</td>
+                                                <td>{{produto.eixo}}</td>
+                                                <td>{{produto.adicao}}</td>
+                                                <td>{{produto.curva}}</td>
+                                                <td>{{produto.cor}}</td>
+                                                <td>{{produto.diametro}}</td>
+                                                <td>{{produto.olho}}</td>
+                                                <td>{{produto.qtd}}</td>
+                                                <td>{{produto.unitario}}</td>
+                                                <td>{{produto.desconto}}</td>
+                                                <td>{{produto.final}}</td>
+                                                <td>{{produto.total}}</td>
+                                                <td><md-button class="btn btn-primary bt-select" ng-click="remove()">Selecionar</md-button> </td>
                                               </tr>
                                             </tbody>
                                           </table>

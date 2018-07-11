@@ -21,6 +21,16 @@ angular
       });
     }
 
+    $scope.dialogCart = function(ev) {
+      $mdDialog.show({
+        contentElement: '#cart',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      });
+    }
+
     $scope.escolheCliente = function(cliente) {
       $scope.cliente = cliente;
     }
@@ -123,7 +133,18 @@ angular
       
     ]
    
-
+    $scope.produtosCarrinho = [
+      {familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
+        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
+        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
+        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"},{familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
+        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
+        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
+        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"},{familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
+        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
+        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
+        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"}
+      ]
 
 
 
