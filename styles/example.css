@@ -39,6 +39,16 @@ md-input-container {
     width: 300px;
 }
 
+.pedidosPorGrupo {
+    color: #26A9BA;
+}
+
+.rows th {
+    font-weight: bold;
+    background-color: #26A9BA;
+    color: #f1f1f1 !important;
+}
+
 md-card {
 background-color: #F2F2F2; 
 }

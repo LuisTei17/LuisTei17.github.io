@@ -101,7 +101,7 @@
                                 </md-card-title>
                               </md-card>
                         <div class="row">
-
+                            
                             <md-input-container ng-if="areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <md-select ng-change="verificaCategoria()" placeholder="Categorias" ng-model="ctrl.categorias">
                                     <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
@@ -111,14 +111,14 @@
                             </md-input-container>
                                 
                             <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <md-select placeholder="Forma de compra" ng-model="ctrl.formasCompra">
+                                <md-select ng-change="verificaFormaCompra(this)" placeholder="Forma de compra" ng-model="formaCompra">
                                     <md-option ng-repeat="forma in formas" ng-value="forma.nome">
                                         {{forma.nome}}
                                     </md-option>
                                 </md-select>
                             </md-input-container>
                             
-                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <md-input-container ng-if="formaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <md-select placeholder="Tipo de faturamento" ng-model="ctrl.formasFaturamento">
                                     <md-option ng-repeat="faturamento in tiposFaturamento" ng-value="faturamento.nome">
                                         {{faturamento.nome}}
@@ -126,7 +126,7 @@
                                 </md-select>
                             </md-input-container>
                                 
-                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">    
+                            <md-input-container ng-if="formaEscolhida && areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">    
                                 <md-select placeholder="Condicao" ng-model="ctrl.condicoesDePagamento">
                                     <span ng-repeat="condicaoPagamento in condicoesPagamento">
                                         <span ng-repeat="(tipo,tiposPagamento) in condicaoPagamento">
@@ -139,18 +139,19 @@
                                 </md-select>
                             </md-input-container>
                             
-                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="txt-inputs col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <md-input-container ng-if="formaEscolhida && areaEscolhida" class="txt-inputs col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <label>Pedido Interno</label>
                                 <input ng-model="pedidoInterno">
                             </md-input-container>
                             
-                            <md-input-container ng-if="categoriaEscolhida && areaEscolhida" class="txt-inputs col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <md-input-container ng-if="formaEscolhida && areaEscolhida" class="txt-inputs col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <label>Observação</label>
                                 <input ng-model="user.title">
                             </md-input-container>
                              
                         </div>
-                        <div ng-if="categoriaEscolhida && areaEscolhida">
+                        
+                        <div ng-if="formaEscolhida && areaEscolhida">
                             <h2 class="sub-carrinho">Escolha seu produto</h2>
                             <div class="row">
                                 <md-input-container ng-if="areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" >
@@ -170,7 +171,7 @@
                                 </md-input-container>
                                     
                                 
-                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida && familiaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <md-input-container ng-if="formaEscolhida && areaEscolhida && familiaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                                     <md-select placeholder="Eixo" ng-model="ctrl.eixoCpr">
                                         <md-option ng-repeat="eixo in eixos" ng-value="eixo.nome">
                                             {{eixo.nome}}
@@ -178,7 +179,7 @@
                                     </md-select>
                                 </md-input-container>
                                     
-                                <md-input-container ng-if="categoriaEscolhida && areaEscolhida && familiaEscolhida" class="txt-inputs col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <md-input-container ng-if="formaEscolhida && areaEscolhida && familiaEscolhida" class="txt-inputs col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                                     <label>Quantidade</label>
                                     <input ng-model="quantid">
                                 </md-input-container>
@@ -187,6 +188,9 @@
                             </div>
                             <br>
                             <md-button class="bt-add-shoppcart md-raised md-primary">Adicionar ao carrinho</md-button>
+                            <md-button ng-click="abrePedidosAgrupados()" class="md-raised md-primary" ng-if="pedAgru">Pedidos por grupo</md-button>
+                            <md-button ng-click="abreRemessas()" class="md-raised md-primary" ng-if="remessas">Ver remessas</md-button>
+
                         </div>
                     </div>
                     <button ng-click="verificaClienteEscolhido($event)" class="shoppcart">
@@ -204,45 +208,151 @@
             </section>
             
             <div style="visibility:hidden">
-                <div class="md-dialog-container" id="clients">
+                <div class="md-dialog-container" id="pedidosAgrupadosDialog">
                     <md-dialog aria-label="Clientes" flex="85">
                         <md-dialog-content style="padding: 20px">
                             
                             <div class="container">
                                 
-                                <md-input-container class="lista md-block" flex-gt-xs>
-                                    <div layout-gt-xs="row" >
-                                        <label>Cliente</label>
-                                        <input type="text" ng-model="pesquisa.Razao">
-                                    </div>
-                                </md-input-container>
-                                <h4>Escolha seu cliente</h4>
-                                <md-table-container>
+                                
+                                <h4>Pedidos por grupo</h4>
+                                <div class="row">
 
-                                    <table md-table>
-                                        <thead md-head>
-                                            <th md-column>ID</th>
-                                            <th md-column>Razao</th>
-                                            <th md-column>CNPJ/CPF</th>
-                                            <th md-column>Cidade/UF</th>
-                                            <th md-column>Tabela</th>
-                                            <th md-column></th>
-                                        </thead>
-                                        <tbody md-body>
-                                            <tr ng-repeat="cliente in clientes | filter:pesquisa">
-                                                <td md-cell>{{cliente.codigo}}</td>
-                                                <td md-cell>{{cliente.Razao}}</td>
-                                                <td md-cell>{{cliente['CNPJ/CPF']}}</td>
-                                                <td md-cell>{{cliente['Cidade/UF']}}</td>
-                                                <td md-cell>{{cliente.tabela}}</td>
-                                                <td md-cell><md-button ng-click="escolheCliente(cliente)">Selecionar</md-button> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            </md-table-container>
+                                    <md-input-container class="col-xs-6 col-sm-4 col-md-3 col-lg-2" >
+                                        <md-select placeholder="Escolha sua família" ng-model="ctrl.familiacpr1">
+                                            <md-option ng-value="familia.nome">
+                                                Lunare Anual Blister
+                                            </md-option>
+                                            <md-option></md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container class="col-xs-6 col-sm-4 col-md-3 col-lg-2" >
+                                        <md-select placeholder="De Grau esférico" ng-model="ctrl.familiacpr2">
+                                            
+                                            <md-option ng-value="ha.um">
+                                                01
+                                            </md-option>
+                                            <md-option ng-value="ha.dois">
+                                                02
+                                            </md-option>
+                                            <md-option ng-value="ha.tres">
+                                                100
+                                            </md-option>
+                                            <md-option></md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    
+                                    <md-input-container class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                        <md-select placeholder="Até grau esférico" ng-model="ctrl.familiacpr3">
+                                            <md-option></md-option>
+                                            
+                                            <md-option ng-value="hb.um">
+                                                01
+                                            </md-option>
+                                            <md-option ng-value="hb.dois">
+                                                02
+                                            </md-option>
+                                            <md-option ng-value="hb.tres">
+                                                100
+                                            </md-option>
+                                            <md-option></md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-button class="col-xs-6 col-sm-4 col-md-3 col-lg-2 md-raised md-primary bt-select">Ok</md-button>
+                                </div>
+                                <md-table-container>
+    
+                                        <table md-table class="tabela-remessas">
+                                            <thead md-head>
+                                                <th md-column>Familia</th>
+                                                <th md-column>Curva</th>
+                                                <th md-column>Adição</th>
+                                                <th md-column>Cor</th>
+                                                <th md-column>Grau</th>
+                                                <th md-column>Quantidade</th>
+                                                <th md-column></th>
+                                            </thead>
+                                            <tbody md-body>
+                                                <tr ng-repeat="cliente in clientes | filter:pesquisa">
+                                                    <td md-cell>Lunare Anual Blister</td>
+                                                    <td md-cell></td>
+                                                    <td md-cell></td>
+                                                    <td md-cell></td>
+                                                    <td md-cell></td>
+                                                    <td md-cell>
+                                                        <md-input-container class="lista md-block" flex-gt-xs>
+                                                            <div layout-gt-xs="row" >
+                                                                <input type="text" placeholder="Quantidade">
+                                                            </div>
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td md-cell><md-button ng-click="remove()">
+                                                            <i class="remove-cart material-icons">
+                                                                    remove_shopping_cart
+
+                                                                </i>
+                                                    </md-button></td>
+                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Selecionar</md-button> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </md-table-container>    
+                                <md-button class="md-raised md-primary bt-select">Concluir</md-button>
+                                
                             </div>
                         </md-dialog-content>
                     </md-dialog>
+                </div>
+                <div class="md-dialog-container" id="remessasDialog">
+                        <md-dialog aria-label="Clientes" flex="85">
+                            <md-dialog-content style="padding: 20px">
+                                
+                                <div class="container">
+                                     <h4>Remessas</h4>
+                                </div>
+                            </md-dialog-content>
+                        </md-dialog>
+                    </div>
+                <div class="md-dialog-container" id="clients">
+                        <md-dialog aria-label="Clientes" flex="85">
+                            <md-dialog-content style="padding: 20px">
+                                
+                                <div class="container">
+                                    
+                                    <md-input-container class="lista md-block" flex-gt-xs>
+                                        <div layout-gt-xs="row" >
+                                            <label>Cliente</label>
+                                            <input type="text" ng-model="pesquisa.Razao">
+                                        </div>
+                                    </md-input-container>
+                                    <h4>Escolha seu cliente</h4>
+                                    <md-table-container>
+    
+                                        <table md-table class="tabela-remessas">
+                                            <thead md-head>
+                                                <th md-column>ID</th>
+                                                <th md-column>Razao</th>
+                                                <th md-column>CNPJ/CPF</th>
+                                                <th md-column>Cidade/UF</th>
+                                                <th md-column>Tabela</th>
+                                                <th md-column></th>
+                                            </thead>
+                                            <tbody md-body>
+                                                <tr ng-repeat="cliente in clientes | filter:pesquisa">
+                                                    <td md-cell>{{cliente.codigo}}</td>
+                                                    <td md-cell>{{cliente.Razao}}</td>
+                                                    <td md-cell>{{cliente['CNPJ/CPF']}}</td>
+                                                    <td md-cell>{{cliente['Cidade/UF']}}</td>
+                                                    <td md-cell>{{cliente.tabela}}</td>
+                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Selecionar</md-button> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </md-table-container>
+                                </div>
+                            </md-dialog-content>
+                        </md-dialog>
+                    </div>
                     <div style="visibility:hidden">
                         <div class="md-dialog-container" id="cart">
                             <md-dialog aria-label="Carrinho" flex="95">
@@ -256,7 +366,7 @@
 
                                             <table md-table>
                                                 <thead md-head>
-                                                <tr>
+                                                <tr class="rows">
                                                     <th md-column>Familia</th>
                                                     <th md-column>Grau Esférico</th>
                                                     <th md-column>Grau Cilíndrico</th>
@@ -299,7 +409,32 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
+                                            <table md-table>
+                                                <thead md-head>
+                                                    <tr class="rows">
+                                                        <th md-column>Subtotal</th>
+                                                        <th md-column>Frete</th>
+                                                        <th md-column>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody md-body>
+                                                    <td md-cell>R$ 120.00</td>
+                                                    <td md-cell>R$ 40.00</td>
+                                                    <td md-cell>R$ 160.00</td>
+                                                </tbody>
+                                            </table>
                                         </md-table-container>
+                                        <div>
+                                            <div class="prazo">Prazo de entrega:</div>
+                                            <md-list flex>
+                                                    <md-list-item class="md-3-line" >
+                                                      <div class="md-list-item-text" layout="column">
+                                                        <h3>Demais Lentes</h3>
+                                                        <h4>14 dias</h4>
+                                                      </div>
+                                                    </md-list-item>
+                                                    <md-divider ></md-divider>
+                                        </div>
                                           <md-button class="btn btn-primary bt-select" ng-click="remove()">Agrupar</md-button>
                                           <md-button class="btn btn-primary bt-select" ng-click="remove()">Finalizar</md-button>
                                     </div>

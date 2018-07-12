@@ -2,8 +2,10 @@ angular
   .module('MyApp', ['ngMaterial', 'md.data.table'])
   .controller('AppCtrl', function ($scope, $mdSidenav, $mdDialog) {
     $scope.areaEscolhida      = false;
-    $scope.clienteEscolhido      = false;
+    $scope.clienteEscolhido   = false;
     $scope.categoriaEscolhida = false;
+    $scope.formaEscolhida     = false;
+    $scope.remessa            = false;
     function buildToggler(componentId) {
       return function() {
         $mdSidenav(componentId).toggle();
@@ -21,6 +23,26 @@ angular
     $scope.dialogClientes = function(ev) {
       $mdDialog.show({
         contentElement: '#clients',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      });
+    }
+
+    $scope.dialogPedidosAgrupados = function(ev) {
+      $mdDialog.show({
+        contentElement: '#pedidosAgrupadosDialog',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      });
+    }
+
+    $scope.abreRemessas = function(ev) {
+      $mdDialog.show({
+        contentElement: '#remessasDialog',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
@@ -145,26 +167,27 @@ angular
       {familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
         unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
         {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
-        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"},{familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
-        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
-        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
-        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"},{familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
-        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
-        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
-        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"},{familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
-        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
-        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
-        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"},{familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
-        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
-        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
-        unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"},{familia: "Optima38", graue: "+0300", grauc: "", eixo: "", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"", qtd:"1", 
-        unitario:"120.00", desconto:"0.00", final:"120.00", total:"120.00"},
-        {familia: "Toric Vision", graue: "", grauc: "+14.00", eixo: "+12", adicao:"", curva:"8.7", cor:"", diametro:"", olho:"OE", qtd:"2", 
         unitario:"95.00", desconto:"0.00", final:"190.00", total:"190.00"}
       ]
 
 
+    $scope.verificaFormaCompra = function(element) {
+      if(element.formaCompra != "") {
+        console.log(element.formaCompra);
+        if(element.formaCompra == "Pontual") {
 
+          $scope.pedAgru = true;     
+          console.log($scope.pedAgru)
+        } else if(element.formaCompra == "Remessa de futura") {
+          $scope.remessa = true;
+          $scope.pedAgru = false;
+        }
+        $scope.formaEscolhida = true;
+      }
+    }
+    $scope.abrePedidosAgrupados = function() {
+      $scope.dialogPedidosAgrupados();
+    }
 
 
    
