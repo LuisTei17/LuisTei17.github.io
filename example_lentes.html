@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
 
+    <link rel="stylesheet" href="styles/vaccordion.css">
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/example.css">
-
     
     </head>
 
@@ -90,22 +90,23 @@
                     </div>
                         <div class="pad container">
                             <md-card ng-if="!clienteEscolhido">
-                                <md-card-title>
-                                <md-card-title-text>
-                                        <span class="md-headline">Olá Admin</span>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-content>
-                                <p>
-                                    Por favor, escolha a área comercial e o cliente antes de realizar algum pedido.
-                                    Para escolher, clique no ícone ao lado do seu nome;
-                                </p>
-                            </md-card-content>
-                        </md-card>
-                        <h2 ng-if="clienteEscolhido">Pedidos
-
-                            <span class="areaComercial" > para {{ areasComercial }}</span>
-                        </h2>
+                                <md-toolbar>
+                                    <div class="md-toolbar-tools">
+                                        <h1>Olá Admin</h1>
+                                        <span flex></span>
+                                    </div>
+                                </md-toolbar>
+                                
+                                <md-card-content>
+                                    <p>
+                                        Por favor, escolha a área comercial e o cliente antes de realizar algum pedido.
+                                       <br> Para escolher, clique no ícone ao lado do seu nome.
+                                    </p>
+                                </md-card-content>
+                            </md-card>
+                            <h2 ng-if="clienteEscolhido">Pedidos
+                                <span class="areaComercial" > para {{ areasComercial }}</span>
+                            </h2>
                         <div class="row">
                             
                             <md-input-container ng-if="clienteEscolhido" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -193,13 +194,13 @@
                                 
                             </div>
                             <br>
-                            <md-button class="bt-add-shoppcart md-raised md-primary">Adicionar ao carrinho</md-button>
+                            <md-button class="md-raised md-primary">Adicionar ao carrinho</md-button>
                             <md-button ng-click="abrePedidosAgrupados()" class="md-raised md-primary" ng-if="pedAgru">Pedidos por grupo</md-button>
                             <md-button ng-click="abreRemessas()" class="md-raised md-primary" ng-disabled="" ng-if="remessa">Ver remessas</md-button>
 
                         </div>
                     </div>
-                    <button ng-click="verificaClienteEscolhido($event)" class="shoppcart">
+                    <md-button ng-click="verificaClienteEscolhido($event)" class="shoppcart md-raised md-primary">
                         
                         <md-tooltip
                         md-direction="{{demo.tipDirection}}">
@@ -209,7 +210,7 @@
                         
                         <i class="material-icons">
                         shopping_cart
-                    </i></button>
+                    </i></md-button>
                 </md-content>
             </section>
             
@@ -298,13 +299,13 @@
                                                             </div>
                                                         </md-input-container>
                                                     </td>
-                                                    <td md-cell><md-button ng-click="remove()">
-                                                            <i class="remove-cart material-icons">
-                                                                    remove_shopping_cart
-
-                                                                </i>
-                                                    </md-button></td>
-                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Escolher</md-button> </td>
+                                                    <td md-cell>
+                                                            <span class="remover">
+                                                                    <i class="material-icons">
+                                                                        delete
+                                                                    </i>
+                                                                </span> 
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -327,18 +328,23 @@
                         </md-dialog>
                     </div>
                 <div class="md-dialog-container" id="clients">
-                        <md-dialog aria-label="Clientes" flex="85">
+                        <md-dialog aria-label="Clientes" flex="60">
+                            <md-toolbar>
+                                <div class="md-toolbar-tools">
+                                    <h1>Escolha seu cliente</h1>  
+                                    <span flex></span>
+                                </div>
+                            </md-toolbar>
                             <md-dialog-content style="padding: 20px">
                                 
                                 <div class="container">
-                                    
                                     <md-input-container class="lista md-block" flex-gt-xs>
                                         <div layout-gt-xs="row" >
                                             <label>Cliente</label>
                                             <input type="text" ng-model="pesquisa.Razao">
                                         </div>
                                     </md-input-container>
-                                    <h4>Escolha seu cliente</h4>
+                                  
                                     <md-table-container>
     
                                         <table md-table class="tabela-remessas">
@@ -357,7 +363,7 @@
                                                     <td md-cell>{{cliente['CNPJ/CPF']}}</td>
                                                     <td md-cell>{{cliente['Cidade/UF']}}</td>
                                                     <td md-cell>{{cliente.tabela}}</td>
-                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Selecionar</md-button> </td>
+                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="md-raised md-primary">Selecionar</md-button> </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -368,36 +374,87 @@
                     </div>
                     <div style="visibility:hidden">
                         <div class="md-dialog-container" id="cart">
-                            <md-dialog aria-label="Carrinho" flex="95">
+                            <md-dialog aria-label="Carrinho" flex="40">
+                                    <md-toolbar>
+                                            <div class="md-toolbar-tools">
+                                              <h1>Carrinho de compras</h1>
+                                              <span flex></span>
+                                            </div>
+                                          </md-toolbar>
                                 <md-dialog-content style="padding: 20px">
+                                   
+                                        <v-accordion class="vAccordion--default" multiple>
+                                            
+                                            <!-- add expanded attribute to open the section -->
+                                            <v-pane ng-repeat="produtos in produtosCarrinho" >
+                                                <v-pane-header>
+                                                    
+                                                    {{ produtos.Familia }} 
+                                                    
+                                                </v-pane-header>
+                                                
+                                                <v-pane-content>
+                                                    <div layout="row" layout-align="start start ">
+                                                        
+                                                        <div>
+                                                            <h4>Dados da lente</h4>
+                                                            <p ng-if="produtos.Graue != ''">
+                                                                Grau esférico: {{ produtos.Graue}}
+                                                            </p>
+                                                            <p ng-if="produtos.Grauc != ''">
+                                                                Grau cilíndrico: {{ produtos.Grauc}}
+                                                            </p>
+                                                            <p ng-if="produtos.Eixo != ''">
+                                                                Eixo: {{ produtos.Eixo}}
+                                                            </p>
+                                                            <p ng-if="produtos.Adicao != ''">
+                                                                Adição: {{ produtos.Adicao}}
+                                                            </p>
+                                                            <p ng-if="produtos.Curva != ''">
+                                                                Curva: {{ produtos.Curva}}
+                                                            </p>
+                                                            <p ng-if="produtos.Cor != ''">
+                                                                Cor: {{ produtos.Cor}}
+                                                            </p>
+                                                            <p ng-if="produtos.Diametro != ''">
+                                                                Diametro: {{ produtos.Diametro}}
+                                                            </p>
+                                                            <p ng-if="produtos.Olho != ''">
+                                                                Olho: {{ produtos.Olho}}
+                                                            </p>
+                                                        </div>
+                                                        <div class="dados-financeiros">
+                                                            <h4>Dados fincanceiros</h4>
+                                                            <p ng-if="produtos.Quantidade != ''">
+                                                                Quantidade: {{ produtos.Quantidade}}
+                                                            </p>
+                                                            <p ng-if="produtos.Unitario != ''">
+                                                                Valor Unitário: {{ produtos.Unitario}}
+                                                            </p>
+                                                            <p ng-if="produtos.Desconto != ''">
+                                                                Desconto: {{ produtos.Desconto}}
+                                                            </p>
+                                                            <p ng-if="produtos.Final != ''">
+                                                                Valor Final: {{ produtos.Final}}
+                                                            </p>
+                                                            <p ng-if="produtos.Total != ''">
+                                                                Total: {{ produtos.Total}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <span class="link-remover">
+                                                        <i class="material-icons">
+                                                            delete
+                                                        </i>
+                                                    </span>
+                                                </md-grid-tile>
+                                            </md-grid-list>
+                                        </v-pane-content>
+                                    </v-pane>
+                                </v-accordion>
+                                <!--
                                     
-                                        
                                      
-                                        <h4>Carrinho de compras para o cliente: {{ cliente.Razao }}</h4>
-                                        <p> Existem {{(produtosCarrinho|filter:pesquisa).length}} itens</p>
-                                        <md-table-container>
-
-                                            <table md-table>
-                                                <thead md-head>
-                                                <tr class="rows">
-                                                    <th md-column>Familia</th>
-                                                    <th md-column>Grau Esférico</th>
-                                                    <th md-column>Grau Cilíndrico</th>
-                                                    <th md-column>Eixo</th>
-                                                    <th md-column>Adição</th>
-                                                    <th md-column>Curva</th>
-                                                    <th md-column>Cor</th>
-                                                    <th md-column>Diâmetro</th>
-                                                    <th md-column>Olho</th>
-                                                    <th md-column>Quantidade</th>
-                                                    <th md-column>Valor unitário</th>
-                                                    <th md-column>Desconto (%)</th>
-                                                    <th md-column>Valor final</th>
-                                                    <th md-column>Total</th>
-                                                    <th md-column></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody md-body>
                                                 <tr ng-repeat="produto in produtosCarrinho | filter:pesquisa">
                                                     <td md-cell>{{produto.familia}}</td>
                                                     <td md-cell>{{produto.graue}}</td>
@@ -414,17 +471,18 @@
                                                     <td md-cell>{{produto.final}}</td>
                                                     <td md-cell>{{produto.total}}</td>
                                                     <td md-cell><md-button ng-click="remove()">
-                                                            <i class="remove-cart material-icons">
-                                                                    remove_shopping_cart
-
-                                                                </i>
+                                                        <i class="remove-cart material-icons">
+                                                            remove_shopping_cart
+                                                            
+                                                        </i>
                                                     </md-button></td>
                                                 </tr>
-                                                </tbody>
-                                            </table>
-                                            <table md-table>
-                                                <thead md-head>
-                                                    <tr class="rows">
+                                            </tbody>
+                                        </table>
+                                    -->
+                                        <table md-table>
+                                            <thead md-head>
+                                                <tr class="rows">
                                                         <th md-column>Subtotal</th>
                                                         <th md-column>Frete</th>
                                                         <th md-column>Total</th>
@@ -448,22 +506,22 @@
                                                     </md-list-item>
                                                     <md-divider ></md-divider>
                                         </div>
-                                          <md-button class="btn btn-primary bt-select" ng-click="remove()">Agrupar</md-button>
-                                          <md-button class="btn btn-primary bt-select" ng-click="remove()">Finalizar</md-button>
+                                          <md-button class="md-raised md-primary" ng-click="remove()">Agrupar</md-button>
+                                          <md-button class="md-raised md-primary" ng-click="remove()">Finalizar</md-button>
                                     </div>
                                 </md-dialog-content>
                             </md-dialog>
                 </div>
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
-            <script src="./bower_components/angular-animate/angular-animate.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
 
 
-        
+        <script src="scripts/vaccordion.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/sidebar.js"></script>
     

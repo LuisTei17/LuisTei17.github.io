@@ -17,12 +17,17 @@ md-menu-bar {
     margin-top: -15px;
 }
 
+.dados-financeiros {
+    margin-left: 30px;
+}
 
+.link-remover {
+    color: #771111;
+}
 
 .splitter {
     width: 100%;
     height: 1%;
-    background-color: #26A9BA;
     padding: 0px;
     position: relative;
 }
@@ -34,7 +39,6 @@ md-menu-bar {
 .divisor {
     width: 100%;
     height: 3px;
-    background-color: #26A9BA;
     padding: 0px;
     position: relative;
 }
@@ -46,11 +50,15 @@ md-menu-bar {
 }
 
  h2 {
-    color: #26A9BA;
+    color: #009688;
     margin-left: 33%;
     
 }
 
+.remover {
+    cursor: pointer;
+    color: #771111;
+}
 
 .logo {
     position: relative;
@@ -62,14 +70,18 @@ md-input-container {
 }
 
 .pedidosPorGrupo {
-    color: #26A9BA;
+    color: #009688;
 }
 
-.rows th {
-    font-weight: bold;
-    background-color: #26A9BA;
-    color: #f1f1f1 !important;
+.link-remover {
+    position: relative;
+    left: 96%;
+    bottom: 230px;
+    cursor: pointer;
+
 }
+
+
 
 md-card {
 background-color: #F2F2F2; 
@@ -84,7 +96,6 @@ md-card .keys {
 }
 
 .bt-select {
-    background-color: #26A9BA !important;
     color: #f1f1f1 !important;
     font-weight: bold !important;
 }
@@ -99,7 +110,7 @@ md-card h3 {
 }
 
 .areaComercial {
-    color: #26A9BA;
+    color: #009688;
 }
 
 .title {
@@ -113,12 +124,12 @@ md-card h3 {
 }
 
 .md-input-focused label, .md-input-focused span, select span  {
-    color: #26A9BA !important;
+    color: #009688 !important;
 }
 
 .md-input-focused input, .md-input-focused md-select-value{
-    border-color: #26A9BA !important;
-    border-bottom-color: #26A9BA !important;
+    border-color: #009688 !important;
+    border-bottom-color: #009688 !important;
 }
 
 .pad {
@@ -149,32 +160,34 @@ md-menu-bar {
 }
 
 .shoppcart {
-    border: none !important;
     position: fixed;
     bottom: 20px;
     left: 90%;
     border-radius: 100%;
     height: 60px;
     width: 60px;
-    background-color: #26A9BA;
     padding: 14px;
+}
+
+.headerAccordion {
+    width: 100%;
+    color: #f1f1f1;
+        
 }
 
 
 .shoppcart i {
-    font-size: 35px;
+    font-size: 40px;
     color: #f1f1f1;
 }
 
 .bt-add-shoppcart {
     border: none;
-    background-color: #26A9BA;
 }
 
 .bt-add-shoppcart:hover {
     border: none;
 
-    background-color: #26A9BA;
 }
 
 .remove-cart  {

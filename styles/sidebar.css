@@ -30,10 +30,6 @@ md-menu-bar.md-default-theme md-menu.md-open > button, md-menu-bar md-menu.md-op
     margin-top: 30px;
 }
 
-.md-primary {
-    background-color: #26A9BA !important;
-}
-
 .profile-icon {
 
     position: relative;
@@ -43,7 +39,7 @@ md-menu-bar.md-default-theme md-menu.md-open > button, md-menu-bar md-menu.md-op
     bottom: 45px;
 }
 .profile-icon i {
-    color: #26A9BA;
+    color: #009688;
     font-size: 40px;
 }
 
@@ -136,6 +132,6 @@ ul li .sub-link {
 }
 
 .sidebar, .sidebar md-content {
-    background-color: #26A9BA;
+    background-color: #009688;
 }
 
