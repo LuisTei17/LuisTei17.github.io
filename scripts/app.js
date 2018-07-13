@@ -6,10 +6,12 @@ angular
     $scope.categoriaEscolhida = false;
     $scope.formaEscolhida     = false;
     $scope.remessa            = false;
+
+    $scope.toggleLeft = buildToggler("left");
+
     function buildToggler(componentId) {
       return function() {
         $mdSidenav(componentId).toggle();
-        let botaoSide = document.getElementsByClassName(".sidenav-button");
         
       };
     }
@@ -78,7 +80,6 @@ angular
     $scope.verificaCategoria = function() {
       $scope.categoriaEscolhida = true;
     };
-    $scope.toggleLeft = buildToggler('left');
     $scope.categoria = {nome:"Escolha uma categoria"};
     $scope.categorias = [
       {nome:"Compras"},
@@ -173,15 +174,19 @@ angular
 
     $scope.verificaFormaCompra = function(element) {
       if(element.formaCompra != "") {
-        console.log(element.formaCompra);
-        if(element.formaCompra == "Pontual") {
+        if(element.formaCompra == "Pontual" || element.formaCompra == "Venda ordem") {
 
+          $scope.remessa = false;
           $scope.pedAgru = true;     
-          console.log($scope.pedAgru)
         } else if(element.formaCompra == "Remessa de futura") {
           $scope.remessa = true;
           $scope.pedAgru = false;
+        } else {
+          $scope.pedAgru = false;
+          $scope.remessa = false;
+
         }
+
         $scope.formaEscolhida = true;
       }
     }
@@ -190,7 +195,7 @@ angular
     }
 
 
-   
+    
    
 
   });

@@ -7,60 +7,344 @@
     <title>Landing page</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="styles/sidebar.css">
-    <link rel="stylesheet" href="styles/landing.css">
+    <link rel="stylesheet" href="styles/example.css">
+
+    
     </head>
 
     <body ng-app="MyApp" ng-cloak>
-            <div ng-controller="AppCtrl as ctrl" layout="column" style="height:100%" ng-cloak>
+        <div ng-controller="AppCtrl as ctrl" layout="column" style="height:100%" ng-cloak>
             
-                    <section layout="row" flex>
-        
-                        <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
-                        md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
-                            <a href="index.html">
-                                <i class="arrow-ico material-icons">
-                                    keyboard_arrow_left
-                                </i>
-                            </a>
-                          
-                            <md-content class="content-list" layout-margin>
-                                    <ul class="links-list">
-                                            <li class="menu-subs">
-                                                <a class="main-link" href="example_lentes.html">Pedidos</a>
-                                            </li>
-                                            <li><a class="main-link" href="index.html">Bonificações</a></li>
-                                            <li><a class="main-link" href="index.html">Relatórios</a></li>
-                                            <li><a class="main-link" href="index.html">Contato</a></li>
-                                            <li><a class="main-link" href="index.html">Pagamentos</a></li>
-                                            <li><a class="main-link" href="index.html">Backoffice</a></li>
-                                        </ul>
-                            </md-content>
+            <section layout="row" flex>
+
+                <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
+                md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
+                    <a href="landing.html"><i class="arrow-ico material-icons">
+                        keyboard_arrow_left
+                    </i></a>
                         
+                    <md-content class="content-list" layout-margin>
+                        <ul class="links-list">
+                                    <li class="menu-subs">
+                                        <a class="main-link" href="example_lentes.html">Pedidos</a>
+                                    </li>
+                                    <li><a class="main-link" href="index.html">Bonificações</a></li>
+                                    <li><a class="main-link" href="index.html">Relatórios</a></li>
+                                    <li><a class="main-link" href="index.html">Contato</a></li>
+                                    <li><a class="main-link" href="index.html">Pagamentos</a></li>
+                                    <li><a class="main-link" href="index.html">Backoffice</a></li>
+                                </ul>
+                            </md-content>
+                            
                         </md-sidenav>
-                
-                <md-content class="background" layout-padding>
-                    <img class="img-fluid logo" src="logo.png"/>
-                    <img class="img-fluid img" src="img_fundo.jpg"/>
                     
+                        <md-content class="background" layout-padding>
+                                <img class="logo img-fluid" src="logo.png"/>
+                                <div class="splitter"></div>
+                                <div>
+                                    <p class="nome-vendedor">Admin</p>
+                                    <md-menu-bar>
+                                        <md-menu class="menu-profile">
+                                            <md-button aria-label="Open phone interactions menu" class="profile-icon md-icon-button" ng-click="$mdOpenMenu()">
+                                                <i class="profile material-icons">
+                                                    account_circle
+                                                </i>
+                                            </md-button>
+                                            <md-menu-content width="4">
+                                                <md-menu-item>
+                                                    <md-menu>
+                                                        <md-button ng-click="$mdOpenMenu()">
+                                                            <span ng-if="!areaEscolhida">Escolher área comercial</span>
+                                                            <span ng-if="areaEscolhida">{{areasComercial}}</span>
+                                                        </md-button>
+                                                        <md-menu-content>
+                                                            <md-menu-item ng-repeat="area in areasComerciais">
+                                                                <md-button ng-click="verificaArea(area)" >{{ area.nome }}</md-button>
+                                                            </md-menu-item>
+                                                        </md-menu-content>
+                                                    </md-menu>
+                                                    
+                                                    
+                                                </md-menu-item>
+                                                <md-menu-item>
+                                                    <md-button  ng-disabled="!areaEscolhida" ng-click="dialogClientes($event)">
+                                                        Escolha seu cliente
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-divider></md-menu-divider>
+                                                <md-menu-item>
+                                                    <md-button>
+                                                        Deslogar
+                                                    </md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </md-menu-bar>
+                                </div>
+                                    <div class="pad container">
+                        
+                    </div>
+                   
                 </md-content>
             </section>
-        </div>
+            
+            <div style="visibility:hidden">
+                <div class="md-dialog-container" id="pedidosAgrupadosDialog">
+                    <md-dialog aria-label="Clientes" flex="85">
+                        <md-dialog-content style="padding: 20px">
+                            
+                            <div class="container">
+                                
+                                
+                                <h4>Pedidos por grupo</h4>
+                                <div class="row">
+
+                                    <md-input-container class="col-xs-6 col-sm-4 col-md-3 col-lg-2" >
+                                        <md-select placeholder="Escolha sua família" ng-model="ctrl.familiacpr1">
+                                            <md-option ng-value="familia.nome">
+                                                Lunare Anual Blister
+                                            </md-option>
+                                            <md-option ng-value="familia.nome">
+                                                Optima Toric
+                                            </md-option>
+                                            <md-option ng-value="familia.nome">
+                                                Purevision 2
+                                            </md-option>
+                                            <md-option></md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container class="col-xs-6 col-sm-4 col-md-3 col-lg-2" >
+                                        <md-select placeholder="De Grau esférico" ng-model="ctrl.familiacpr2">
+                                            
+                                            <md-option ng-value="ha.um">
+                                                01
+                                            </md-option>
+                                            <md-option ng-value="ha.dois">
+                                                02
+                                            </md-option>
+                                            <md-option ng-value="ha.tres">
+                                                100
+                                            </md-option>
+                                            <md-option></md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    
+                                    <md-input-container class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                        <md-select placeholder="Até grau esférico" ng-model="ctrl.familiacpr3">
+                                            <md-option></md-option>
+                                            
+                                            <md-option ng-value="hb.um">
+                                                01
+                                            </md-option>
+                                            <md-option ng-value="hb.dois">
+                                                02
+                                            </md-option>
+                                            <md-option ng-value="hb.tres">
+                                                100
+                                            </md-option>
+                                            <md-option></md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-button class="col-xs-6 col-sm-4 col-md-3 col-lg-2 md-raised md-primary bt-select">Ok</md-button>
+                                </div>
+                                <md-table-container>
     
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+                                        <table md-table class="tabela-remessas">
+                                            <thead md-head>
+                                                <th md-column>Familia</th>
+                                                <th md-column>Curva</th>
+                                                <th md-column>Adição</th>
+                                                <th md-column>Cor</th>
+                                                <th md-column>Grau</th>
+                                                <th md-column>Quantidade</th>
+                                                <th md-column></th>
+                                            </thead>
+                                            <tbody md-body>
+                                                <tr>
+                                                    <td md-cell>Lunare Anual Blister</td>
+                                                    <td md-cell></td>
+                                                    <td md-cell>12</td>
+                                                    <td md-cell></td>
+                                                    <td md-cell></td>
+                                                    <td md-cell>
+                                                        <md-input-container class="lista md-block" flex-gt-xs>
+                                                            <div layout-gt-xs="row" >
+                                                                <input type="text" placeholder="Quantidade">
+                                                            </div>
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td md-cell><md-button ng-click="remove()">
+                                                            <i class="remove-cart material-icons">
+                                                                    remove_shopping_cart
+
+                                                                </i>
+                                                    </md-button></td>
+                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Selecionar</md-button> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </md-table-container>    
+                                <md-button class="md-raised md-primary bt-select">Concluir</md-button>
+                                
+                            </div>
+                        </md-dialog-content>
+                    </md-dialog>
+                </div>
+                <div class="md-dialog-container" id="remessasDialog">
+                        <md-dialog aria-label="Clientes" flex="85">
+                            <md-dialog-content style="padding: 20px">
+                                
+                                <div class="container">
+                                    <h4>Remessas</h4>
+
+                                </div>
+                            </md-dialog-content>
+                        </md-dialog>
+                    </div>
+                <div class="md-dialog-container" id="clients">
+                        <md-dialog aria-label="Clientes" flex="85">
+                            <md-dialog-content style="padding: 20px">
+                                
+                                <div class="container">
+                                    
+                                    <md-input-container class="lista md-block" flex-gt-xs>
+                                        <div layout-gt-xs="row" >
+                                            <label>Cliente</label>
+                                            <input type="text" ng-model="pesquisa.Razao">
+                                        </div>
+                                    </md-input-container>
+                                    <h4>Escolha seu cliente</h4>
+                                    <md-table-container>
+    
+                                        <table md-table class="tabela-remessas">
+                                            <thead md-head>
+                                                <th md-column>ID</th>
+                                                <th md-column>Razao</th>
+                                                <th md-column>CNPJ/CPF</th>
+                                                <th md-column>Cidade/UF</th>
+                                                <th md-column>Tabela</th>
+                                                <th md-column></th>
+                                            </thead>
+                                            <tbody md-body>
+                                                <tr ng-repeat="cliente in clientes | filter:pesquisa">
+                                                    <td md-cell>{{cliente.codigo}}</td>
+                                                    <td md-cell>{{cliente.Razao}}</td>
+                                                    <td md-cell>{{cliente['CNPJ/CPF']}}</td>
+                                                    <td md-cell>{{cliente['Cidade/UF']}}</td>
+                                                    <td md-cell>{{cliente.tabela}}</td>
+                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Selecionar</md-button> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </md-table-container>
+                                </div>
+                            </md-dialog-content>
+                        </md-dialog>
+                    </div>
+                    <div style="visibility:hidden">
+                        <div class="md-dialog-container" id="cart">
+                            <md-dialog aria-label="Carrinho" flex="95">
+                                <md-dialog-content style="padding: 20px">
+                                    
+                                        
+                                     
+                                        <h4>Carrinho de compras para o cliente: {{ cliente.Razao }}</h4>
+                                        <p> Existem {{(produtosCarrinho|filter:pesquisa).length}} itens</p>
+                                        <md-table-container>
+
+                                            <table md-table>
+                                                <thead md-head>
+                                                <tr class="rows">
+                                                    <th md-column>Familia</th>
+                                                    <th md-column>Grau Esférico</th>
+                                                    <th md-column>Grau Cilíndrico</th>
+                                                    <th md-column>Eixo</th>
+                                                    <th md-column>Adição</th>
+                                                    <th md-column>Curva</th>
+                                                    <th md-column>Cor</th>
+                                                    <th md-column>Diâmetro</th>
+                                                    <th md-column>Olho</th>
+                                                    <th md-column>Quantidade</th>
+                                                    <th md-column>Valor unitário</th>
+                                                    <th md-column>Desconto (%)</th>
+                                                    <th md-column>Valor final</th>
+                                                    <th md-column>Total</th>
+                                                    <th md-column></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody md-body>
+                                                <tr ng-repeat="produto in produtosCarrinho | filter:pesquisa">
+                                                    <td md-cell>{{produto.familia}}</td>
+                                                    <td md-cell>{{produto.graue}}</td>
+                                                    <td md-cell>{{produto.grauc}}</td>
+                                                    <td md-cell>{{produto.eixo}}</td>
+                                                    <td md-cell>{{produto.adicao}}</td>
+                                                    <td md-cell>{{produto.curva}}</td>
+                                                    <td md-cell>{{produto.cor}}</td>
+                                                    <td md-cell>{{produto.diametro}} %</td>
+                                                    <td md-cell>{{produto.olho}}</td>
+                                                    <td md-cell>{{produto.qtd}}</td>
+                                                    <td md-cell>{{produto.unitario}}</td>
+                                                    <td md-cell>{{produto.desconto}}</td>
+                                                    <td md-cell>{{produto.final}}</td>
+                                                    <td md-cell>{{produto.total}}</td>
+                                                    <td md-cell><md-button ng-click="remove()">
+                                                            <i class="remove-cart material-icons">
+                                                                    remove_shopping_cart
+
+                                                                </i>
+                                                    </md-button></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table md-table>
+                                                <thead md-head>
+                                                    <tr class="rows">
+                                                        <th md-column>Subtotal</th>
+                                                        <th md-column>Frete</th>
+                                                        <th md-column>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody md-body>
+                                                    <td md-cell>R$ 120.00</td>
+                                                    <td md-cell>R$ 40.00</td>
+                                                    <td md-cell>R$ 160.00</td>
+                                                </tbody>
+                                            </table>
+                                        </md-table-container>
+                                        <div>
+                                            <div class="prazo">Prazo de entrega:</div>
+                                            <md-list flex>
+                                                    <md-list-item class="md-3-line" >
+                                                      <div class="md-list-item-text" layout="column">
+                                                        <h3>Demais Lentes</h3>
+                                                        <h4>14 dias</h4>
+                                                      </div>
+                                                    </md-list-item>
+                                                    <md-divider ></md-divider>
+                                        </div>
+                                          <md-button class="btn btn-primary bt-select" ng-click="remove()">Agrupar</md-button>
+                                          <md-button class="btn btn-primary bt-select" ng-click="remove()">Finalizar</md-button>
+                                    </div>
+                                </md-dialog-content>
+                            </md-dialog>
+                </div>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+
 
         
         <script src="scripts/app.js"></script>

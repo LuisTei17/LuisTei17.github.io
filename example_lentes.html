@@ -24,7 +24,6 @@
         <div ng-controller="AppCtrl as ctrl" layout="column" style="height:100%" ng-cloak>
             
             <section layout="row" flex>
-
                 <md-sidenav class="md-sidenav-left sidebar" md-component-id="left"
                 md-disable-close-events md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
                     <a href="landing.html"><i class="arrow-ico material-icons">
@@ -48,8 +47,10 @@
                 
                 <md-content class="background" layout-padding>
                     <img class="logo img-fluid" src="logo.png"/>
-                    <md-menu-bar>
-
+                    <div class="splitter"></div>
+                    <div class="menu-icon">
+                        <p class="nome-vendedor">Admin</p>
+                        <md-menu-bar>
                             <md-menu class="menu-profile">
                                 <md-button aria-label="Open phone interactions menu" class="profile-icon md-icon-button" ng-click="$mdOpenMenu()">
                                     <i class="profile material-icons">
@@ -85,24 +86,29 @@
                                     </md-menu-item>
                                 </md-menu-content>
                             </md-menu>
-                            </md-menu-bar>
-                    <div class="splitter"></div>
-                    <div class="pad container">
-                        <h2>Pedidos
-
-                            <span class="areaComercial" ng-if="areaEscolhida"> para {{ areasComercial }}</span>
-                        </h2>
-                        <md-card ng-if="!areaEscolhida" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                        </md-menu-bar>
+                    </div>
+                        <div class="pad container">
+                            <md-card ng-if="!clienteEscolhido">
                                 <md-card-title>
-                                  <md-card-title-text>
-                                    <span class="md-headline">Olá Admin</span>
-                                    <span class="md-subhead">Por favor, clique no ícone para escolher a área comercial</span>
-                                  </md-card-title-text>
-                                </md-card-title>
-                              </md-card>
+                                <md-card-title-text>
+                                        <span class="md-headline">Olá Admin</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>
+                                    Por favor, escolha a área comercial e o cliente antes de realizar algum pedido.
+                                    Para escolher, clique no ícone ao lado do seu nome;
+                                </p>
+                            </md-card-content>
+                        </md-card>
+                        <h2 ng-if="clienteEscolhido">Pedidos
+
+                            <span class="areaComercial" > para {{ areasComercial }}</span>
+                        </h2>
                         <div class="row">
                             
-                            <md-input-container ng-if="areaEscolhida" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <md-input-container ng-if="clienteEscolhido" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <md-select ng-change="verificaCategoria()" placeholder="Categorias" ng-model="ctrl.categorias">
                                     <md-option ng-repeat="categoria in categorias" ng-value="categoria.nome">
                                         {{categoria.nome}}
@@ -138,7 +144,7 @@
                                     </span>
                                 </md-select>
                             </md-input-container>
-                            
+                            <br>
                             <md-input-container ng-if="formaEscolhida && areaEscolhida" class="txt-inputs col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <label>Pedido Interno</label>
                                 <input ng-model="pedidoInterno">
@@ -150,8 +156,8 @@
                             </md-input-container>
                              
                         </div>
-                        
                         <div ng-if="formaEscolhida && areaEscolhida">
+                            <div class="divisor"></div>
                             <h2 class="sub-carrinho">Escolha seu produto</h2>
                             <div class="row">
                                 <md-input-container ng-if="areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" >
@@ -178,7 +184,7 @@
                                         </md-option>
                                     </md-select>
                                 </md-input-container>
-                                    
+                                <br>
                                 <md-input-container ng-if="formaEscolhida && areaEscolhida && familiaEscolhida" class="txt-inputs col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                                     <label>Quantidade</label>
                                     <input ng-model="quantid">
@@ -189,7 +195,7 @@
                             <br>
                             <md-button class="bt-add-shoppcart md-raised md-primary">Adicionar ao carrinho</md-button>
                             <md-button ng-click="abrePedidosAgrupados()" class="md-raised md-primary" ng-if="pedAgru">Pedidos por grupo</md-button>
-                            <md-button ng-click="abreRemessas()" class="md-raised md-primary" ng-if="remessas">Ver remessas</md-button>
+                            <md-button ng-click="abreRemessas()" class="md-raised md-primary" ng-disabled="" ng-if="remessa">Ver remessas</md-button>
 
                         </div>
                     </div>
@@ -222,6 +228,12 @@
                                         <md-select placeholder="Escolha sua família" ng-model="ctrl.familiacpr1">
                                             <md-option ng-value="familia.nome">
                                                 Lunare Anual Blister
+                                            </md-option>
+                                            <md-option ng-value="familia.nome">
+                                                Optima Toric
+                                            </md-option>
+                                            <md-option ng-value="familia.nome">
+                                                Purevision 2
                                             </md-option>
                                             <md-option></md-option>
                                         </md-select>
@@ -273,10 +285,10 @@
                                                 <th md-column></th>
                                             </thead>
                                             <tbody md-body>
-                                                <tr ng-repeat="cliente in clientes | filter:pesquisa">
+                                                <tr>
                                                     <td md-cell>Lunare Anual Blister</td>
                                                     <td md-cell></td>
-                                                    <td md-cell></td>
+                                                    <td md-cell>12</td>
                                                     <td md-cell></td>
                                                     <td md-cell></td>
                                                     <td md-cell>
@@ -292,7 +304,7 @@
 
                                                                 </i>
                                                     </md-button></td>
-                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Selecionar</md-button> </td>
+                                                    <td md-cell><md-button ng-click="escolheCliente(cliente)" class="bt-select">Escolher</md-button> </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -308,7 +320,8 @@
                             <md-dialog-content style="padding: 20px">
                                 
                                 <div class="container">
-                                     <h4>Remessas</h4>
+                                    <h4>Remessas</h4>
+
                                 </div>
                             </md-dialog-content>
                         </md-dialog>
@@ -442,8 +455,8 @@
                             </md-dialog>
                 </div>
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
+            <script src="./bower_components/angular-animate/angular-animate.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
