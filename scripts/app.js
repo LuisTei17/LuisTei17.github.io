@@ -187,15 +187,15 @@ angular
       
     ]
    
-    $scope.produtosCarrinho = [ {"Optima38": [{Graue: "+0300", Grauc: "", Eixo: "", Adicao:"+12", Curva:"8.7", Cor:"", Diametro:"", Olho:"", Quantidade:"1", 
+    $scope.produtosCarrinho = [ {"Optima38": [{sku: "6632+1125",Graue: "+0300", Grauc: "", Eixo: "", Adicao:"+12", Curva:"8.7", Cor:"", Diametro:"", Olho:"", Quantidade:"1", 
         Unitário:"120.00", Desconto:"0.00", Final:"120.00", Total:"120.00"}
       ]
     }, 
 
     {"Toric Vision":[
 
-      {Graue: "", Grauc: "+14.00", Eixo: "+12", Adicao:"", Curva:"8.7", Cor:"Roxo", Diametro:"", Olho:"OE", Quantidade:"2", 
-      Unitário:"95.00", Desconto:"0.00", Final:"190.00", Total:"190.00"},{Graue: "+2.00", Grauc: "+14.00", Eixo: "+12", Adicao:"", Curva:"8.7", Cor:"", Diametro:"", Olho:"OE", Quantidade:"2", 
+      {sku: "281101+0125",Graue: "", Grauc: "+14.00", Eixo: "+12", Adicao:"", Curva:"8.7", Cor:"Roxo", Diametro:"", Olho:"OE", Quantidade:"2", 
+      Unitário:"95.00", Desconto:"0.00", Final:"190.00", Total:"190.00"},{sku: "18731+0125",Graue: "+2.00", Grauc: "+14.00", Eixo: "+12", Adicao:"", Curva:"8.7", Cor:"", Diametro:"", Olho:"OE", Quantidade:"2", 
       Unitário:"95.00", Desconto:"0.00", Final:"190.00", Total:"190.00"}
       ]
     }

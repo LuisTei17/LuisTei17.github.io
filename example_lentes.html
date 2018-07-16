@@ -389,7 +389,8 @@
                                             <!-- add expanded attribute to open the section -->
                                             <v-pane ng-repeat="(familia, produto) in produtos" >
                                                 <v-pane-header>
-                                                    {{ familia }} 
+                                                    {{ familia }} <br>
+                                                   Total: R$ 360,00
                                                 </v-pane-header>
                                                 
                                                 <v-pane-content>
@@ -398,7 +399,7 @@
 
                                                             <table md-table class="tabela-remessas">
                                                                 <thead md-head>
-                                                                    <th md-column>Grau Esférico</th>
+                                                                    <th md-column>SKU</th>
                                                                     <th md-column>Grau Cilíndrico</th>
                                                                     <th md-column>Eixo</th>
                                                                     <th md-column>Adição</th>
@@ -411,8 +412,8 @@
                                                                 <tbody md-body>
                                                                     
                                                                     <tr class="items" ng-repeat="item in produto | filter:pesquisa">
+                                                                        <td md-cell>{{item.sku}}</td>
                                                                         <td md-cell>{{item.Graue}}</td>
-                                                                        <td md-cell>{{item.Grauc}}</td>
                                                                         <td md-cell>{{item.Eixo}}</td>
                                                                         <td md-cell>{{item.Adicao}}</td>
                                                                         <td md-cell>{{item.Curva}}</td>
