@@ -17,7 +17,7 @@ body {
     top: 30px;
     margin-bottom: 20px;
     width: 300px;
-    left: 9%;
+    left: 20%;
 }
 
 .login {
@@ -118,7 +118,7 @@ a:hover {
 @media only screen and (min-width: 1000px) {
     .logo {
         width: 500px;
-        left: 31%;
+        left: 33%;
     }
     .login {
         width: 25%;
