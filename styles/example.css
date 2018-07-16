@@ -161,6 +161,7 @@ md-menu-bar {
     height: 60px;
     width: 60px;
     padding: 14px;
+    min-width: 70px !important;
 }
 
 .headerAccordion {
@@ -168,6 +169,7 @@ md-menu-bar {
     color: #f1f1f1;
         
 }
+
 
 
 .shoppcart i {
