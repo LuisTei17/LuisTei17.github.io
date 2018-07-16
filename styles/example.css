@@ -204,7 +204,7 @@ md-menu-bar {
 
 @media only screen and (max-width: 530px) {    
     .logo {
-        left: 0%;
+        left: 1%;
     }
 
     h2 {
