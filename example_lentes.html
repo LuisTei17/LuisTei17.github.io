@@ -66,7 +66,7 @@
                                             </md-button>
                                             <md-menu-content>
                                                 <md-menu-item ng-repeat="area in areasComerciais">
-                                                    <md-button ng-click="verificaArea(area)" >{{ area.nome }}</md-button>
+                                                    <md-button md-prevent-menu-close="md-prevent-menu-close" ng-click="verificaArea(area)" >{{ area.nome }}</md-button>
                                                 </md-menu-item>
                                             </md-menu-content>
                                         </md-menu>
@@ -160,8 +160,8 @@
                         <div ng-if="formaEscolhida && areaEscolhida">
                             <div class="divisor"></div>
                             <h2 class="sub-carrinho">Escolha seu produto</h2>
-                            <div class="row">
-                                <md-input-container ng-if="areaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" >
+                            <div  layout="row">
+                                <md-input-container class="md-block" ng-if="areaEscolhida" >
                                     <md-select ng-change="verificaFamilia()" placeholder="Escolha sua família" ng-model="ctrl.familiacpr">
                                         <md-option ng-repeat="familia in familias" ng-value="familia.nome">
                                             {{familia.nome}}
@@ -169,7 +169,7 @@
                                     </md-select>
                                 </md-input-container>                            
     
-                                <md-input-container ng-if="areaEscolhida && familiaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <md-input-container class="md-block" ng-if="areaEscolhida && familiaEscolhida">
                                     <md-select placeholder="graue" ng-model="ctrl.grauecpd">
                                         <md-option ng-repeat="grau in graus" ng-value="grau.nome">
                                             {{grau.nome}}
@@ -178,19 +178,20 @@
                                 </md-input-container>
                                     
                                 
-                                <md-input-container ng-if="formaEscolhida && areaEscolhida && familiaEscolhida" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <md-input-container class="md-block" ng-if="formaEscolhida && areaEscolhida && familiaEscolhida">
                                     <md-select placeholder="Eixo" ng-model="ctrl.eixoCpr">
                                         <md-option ng-repeat="eixo in eixos" ng-value="eixo.nome">
                                             {{eixo.nome}}
                                         </md-option>
                                     </md-select>
                                 </md-input-container>
-                                <br>
-                                <md-input-container ng-if="formaEscolhida && areaEscolhida && familiaEscolhida" class="txt-inputs col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                <md-input-container class="md-block" ng-if="formaEscolhida && areaEscolhida && familiaEscolhida">
                                     <label>Quantidade</label>
                                     <input ng-model="quantid">
                                 </md-input-container>
-                                
+                                <i ng-if="formaEscolhida && areaEscolhida && familiaEscolhida" class="material-icons color">
+                                        add_circle_outline
+                                </i>
                                 
                             </div>
                             <br>
@@ -301,7 +302,7 @@
                                                     </td>
                                                     <td md-cell>
                                                             <span class="remover">
-                                                                    <i class="material-icons">
+                                                                    <i  md-no-ink class="material-icons color">
                                                                         delete
                                                                     </i>
                                                                 </span> 
@@ -374,7 +375,7 @@
                     </div>
                     <div style="visibility:hidden">
                         <div class="md-dialog-container" id="cart">
-                            <md-dialog aria-label="Carrinho" flex="40">
+                            <md-dialog aria-label="Carrinho" flex="80">
                                     <md-toolbar>
                                             <div class="md-toolbar-tools">
                                               <h1>Carrinho de compras</h1>
@@ -383,70 +384,49 @@
                                           </md-toolbar>
                                 <md-dialog-content style="padding: 20px">
                                    
-                                        <v-accordion class="vAccordion--default" multiple>
+                                        <v-accordion class="vAccordion--default" multiple ng-repeat="produtos in produtosCarrinho">
                                             
                                             <!-- add expanded attribute to open the section -->
-                                            <v-pane ng-repeat="produtos in produtosCarrinho" >
+                                            <v-pane ng-repeat="(familia, produto) in produtos" >
                                                 <v-pane-header>
-                                                    
-                                                    {{ produtos.Familia }} 
-                                                    
+                                                    {{ familia }} 
                                                 </v-pane-header>
                                                 
                                                 <v-pane-content>
-                                                    <div layout="row" layout-align="start start ">
                                                         
-                                                        <div>
-                                                            <h4>Dados da lente</h4>
-                                                            <p ng-if="produtos.Graue != ''">
-                                                                Grau esférico: {{ produtos.Graue}}
-                                                            </p>
-                                                            <p ng-if="produtos.Grauc != ''">
-                                                                Grau cilíndrico: {{ produtos.Grauc}}
-                                                            </p>
-                                                            <p ng-if="produtos.Eixo != ''">
-                                                                Eixo: {{ produtos.Eixo}}
-                                                            </p>
-                                                            <p ng-if="produtos.Adicao != ''">
-                                                                Adição: {{ produtos.Adicao}}
-                                                            </p>
-                                                            <p ng-if="produtos.Curva != ''">
-                                                                Curva: {{ produtos.Curva}}
-                                                            </p>
-                                                            <p ng-if="produtos.Cor != ''">
-                                                                Cor: {{ produtos.Cor}}
-                                                            </p>
-                                                            <p ng-if="produtos.Diametro != ''">
-                                                                Diametro: {{ produtos.Diametro}}
-                                                            </p>
-                                                            <p ng-if="produtos.Olho != ''">
-                                                                Olho: {{ produtos.Olho}}
-                                                            </p>
-                                                        </div>
-                                                        <div class="dados-financeiros">
-                                                            <h4>Dados fincanceiros</h4>
-                                                            <p ng-if="produtos.Quantidade != ''">
-                                                                Quantidade: {{ produtos.Quantidade}}
-                                                            </p>
-                                                            <p ng-if="produtos.Unitario != ''">
-                                                                Valor Unitário: {{ produtos.Unitario}}
-                                                            </p>
-                                                            <p ng-if="produtos.Desconto != ''">
-                                                                Desconto: {{ produtos.Desconto}}
-                                                            </p>
-                                                            <p ng-if="produtos.Final != ''">
-                                                                Valor Final: {{ produtos.Final}}
-                                                            </p>
-                                                            <p ng-if="produtos.Total != ''">
-                                                                Total: {{ produtos.Total}}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <span class="link-remover">
-                                                        <i class="material-icons">
-                                                            delete
-                                                        </i>
-                                                    </span>
+                                                    <md-table-container>
+
+                                                            <table md-table class="tabela-remessas">
+                                                                <thead md-head>
+                                                                    <th md-column>Grau Esférico</th>
+                                                                    <th md-column>Grau Cilíndrico</th>
+                                                                    <th md-column>Eixo</th>
+                                                                    <th md-column>Adição</th>
+                                                                    <th md-column>Curva</th>
+                                                                    <th md-column>Cor</th>
+                                                                    <th md-column>Diametro</th>
+                                                                    <th md-column>Olho</th>
+                                                                    <th md-column></th>
+                                                                </thead>
+                                                                <tbody md-body>
+                                                                    
+                                                                    <tr class="items" ng-repeat="item in produto | filter:pesquisa">
+                                                                        <td md-cell>{{item.Graue}}</td>
+                                                                        <td md-cell>{{item.Grauc}}</td>
+                                                                        <td md-cell>{{item.Eixo}}</td>
+                                                                        <td md-cell>{{item.Adicao}}</td>
+                                                                        <td md-cell>{{item.urva}}</td>
+                                                                        <td md-cell>{{item.cor}}</td>
+                                                                        <td md-cell>{{item.diametro}}</td>
+                                                                        <td md-cell>{{item.olho}}</td>
+                                                                        <td md-cell><i class="material-icons link-remover">
+                                                                                    delete
+                                                                                </i></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                    </md-table-container>
+                                                   
                                                 </md-grid-tile>
                                             </md-grid-list>
                                         </v-pane-content>
@@ -457,14 +437,7 @@
                                      
                                                 <tr ng-repeat="produto in produtosCarrinho | filter:pesquisa">
                                                     <td md-cell>{{produto.familia}}</td>
-                                                    <td md-cell>{{produto.graue}}</td>
-                                                    <td md-cell>{{produto.grauc}}</td>
-                                                    <td md-cell>{{produto.eixo}}</td>
-                                                    <td md-cell>{{produto.adicao}}</td>
-                                                    <td md-cell>{{produto.curva}}</td>
-                                                    <td md-cell>{{produto.cor}}</td>
-                                                    <td md-cell>{{produto.diametro}} %</td>
-                                                    <td md-cell>{{produto.olho}}</td>
+                                                   
                                                     <td md-cell>{{produto.qtd}}</td>
                                                     <td md-cell>{{produto.unitario}}</td>
                                                     <td md-cell>{{produto.desconto}}</td>
