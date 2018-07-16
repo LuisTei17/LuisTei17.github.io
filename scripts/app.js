@@ -40,8 +40,8 @@ angular
 
     $scope.verificaClienteEscolhido = function (ev) {
       if($scope.clienteEscolhido) {
+        $scope.dialogCart(ev);
       };
-      $scope.dialogCart(ev);
     }
 
     $scope.dialogClientes = function(ev) {
